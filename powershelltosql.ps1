@@ -40,7 +40,36 @@ do {
         Write-Output "Successfully connected to Server=$server, Database=$databaseName"
 		$sqlCmd = New-Object System.Data.SqlClient.SqlCommand
         $sqlCmd.Connection = $sqlConnection
-        $sqlCmd.CommandText = $("SELECT * FROM [dbo].[entity_azure_app_gateway]")	
+        $sqlCmd.CommandText = $("INSERT INTO [dbo].[entity_azure_app_gateway]
+([id]
+,[location]
+,[resource_id]
+,[sku_name]
+,[api_version]
+,[state]
+,[owner_operation_id]
+,[owner_operation_type]
+,[previous_owner_operation_id]
+,[previous_owner_operation_type]
+,[create_time]
+,[entity_version]
+,[is_provisioned]
+,[error_message])
+VALUES
+(NEWID()
+,'ukwest'
+,'/subscriptions/c1373d5d-12f4-40c5-9ed5-5b0cb35e8e7e/resourceGroups/rg-gw-prod-ukwest-1/providers/Microsoft.Network/applicationGateways/control-ring-app-gw'
+,'WAF_v2'
+,'2021-01-01'
+,'Ready'
+,NULL
+,NULL
+,NULL
+,NULL
+,GETDATE()
+,0
+,1
+,NULL)")	
         $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter
 		$SqlAdapter.SelectCommand = $SqlCmd
 		$DataSet = New-Object System.Data.DataSet 
