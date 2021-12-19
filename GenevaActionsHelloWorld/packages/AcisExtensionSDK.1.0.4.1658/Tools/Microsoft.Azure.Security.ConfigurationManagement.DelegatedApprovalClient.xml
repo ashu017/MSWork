@@ -1,0 +1,635 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.Security.ConfigurationManagement.DelegatedApprovalClient</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment">
+            <summary>
+            Specifies the dSCM environment against which to authenticate.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Local">
+            <summary>
+            The localhost environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Test">
+            <summary>
+            The test environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Ppe">
+            <summary>
+            The pre-production environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Prod">
+            <summary>
+            The production environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.NCTest">
+            <summary>
+            The National Clouds test environment
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Prod4">
+            <summary>
+            dSCM4
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.RX">
+            <summary>
+            US Sec cloud endpoint
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.RXEast">
+            <summary>
+            US Sec cloud endpoint (East Region)
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.RXWest">
+            <summary>
+            US Sec cloud endpoint (West Region)
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.EX">
+            <summary>
+            US Nat cloud endpoint
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.EXEast">
+            <summary>
+            US Nat cloud endpoint (East Region)
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.EXWest">
+            <summary>
+            US Nat cloud endpoint (West Region)
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Ppe2">
+            <summary>
+            Ppe2 Second pre-production environment
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Fairfax">
+            <summary>
+            ADMIN USE ONLY - Fairfax cloud endpoint
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Blackforest">
+            <summary>
+            ADMIN USE ONLY - Blackforest cloud endpoint
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment.Mooncake">
+            <summary>
+            ADMIN USE ONLY - Mooncake cloud endpoint
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext">
+            <summary>
+            Represents a context in which a client is authenticated to dSCM via dSTS.
+            The client is authenticated using an active authentication protocol.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.WindowsAzure.Security.Authentication.Contracts.IClientCredential,Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class.
+            </summary>
+            <param name="clientCredential">The client credential to use for authentication.</param>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="httpClient">The HttpClient to use for network communication with the dSCM service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.WindowsAzure.Security.Authentication.Contracts.IClientCredential,System.String,System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class.
+            </summary>
+            <param name="clientCredential">The client credential to use for authentication.</param>
+            <param name="endpoint">The dSCM endpoint against which to authenticate.</param>
+            <param name="serviceName">
+            The service name component of dSCM's dSTS realm.
+            For example, if the full realm is "svc://dscm@dscm.core.windows.net" then this value would be "dscm".
+            </param>
+            <param name="httpClient">The HttpClient to use for network communication with the dSCM service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Collections.Generic.IEnumerable{System.String},System.Net.Http.HttpMessageHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class by using Windows Authentication.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="trustedStsCertificateThumbprints">Optional. List of trusted dSTS certificate thumbprints.</param>
+            <param name="handler">Optional. A custom handler for communication with the service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Security.Cryptography.X509Certificates.X509Certificate2,System.IdentityModel.Tokens.SecurityToken,System.Collections.Generic.IEnumerable{System.String},System.Net.Http.HttpMessageHandler,Microsoft.WindowsAzure.Security.Authentication.X509CertCredentialType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class by using certificate-based authentication
+            when the client's home dSTS is the same as the service's.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="clientCertificate">The client's X.509 certificate.</param>
+            <param name="actAsToken">ActAs security token</param>
+            <param name="trustedStsCertificateThumbprints">Optional. List of trusted dSTS certificate thumbprints.</param>
+            <param name="handler">Optional. A custom handler for communication with the service.</param>
+            <param name="certCredentialType">Optional. Either SubjectNameCredential or CertificateCredential</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Uri,System.IdentityModel.Tokens.SecurityToken,System.Collections.Generic.IEnumerable{System.String},System.Net.Http.HttpMessageHandler,Microsoft.WindowsAzure.Security.Authentication.X509CertCredentialType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class by using certificate-based authentication
+            when the client's home dSTS differs from the service's home dSTS.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="clientCertificate">The client's X.509 certificate.</param>
+            <param name="clientHomeStsEndpoint">The client's home dSTS certificate endpoint. eg: https://{dsts dns}/v2/wstrust/13/certificate</param>
+            <param name="actAsToken">ActAs security token</param>
+            <param name="trustedStsCertificateThumbprints">Optional. List of trusted dSTS certificate thumbprints.</param>
+            <param name="handler">Optional. A custom handler for communication with the service.</param>
+            <param name="certCredentialType">Optional. Either SubjectNameCredential or CertificateCredential</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.String,System.IdentityModel.Tokens.SecurityToken,System.Collections.Generic.IEnumerable{System.String},System.Net.Http.HttpMessageHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext"/> class by using MSI authentication
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="msiName">Name of the MSI</param>
+            <param name="actAsToken">ActAs security token</param>
+            <param name="trustedStsCertificateThumbprints">Optional. List of trusted dSTS certificate thumbprints.</param>
+            <param name="handler">Optional. A custom handler for communication with the service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String[]},System.String,System.String,System.Uri,System.IdentityModel.Tokens.SecurityToken,System.Collections.Generic.IEnumerable{System.String},System.Net.Http.HttpMessageHandler,System.String,Microsoft.WindowsAzure.Security.Authentication.X509CertCredentialType)">
+            <summary>
+            For internal use -- prefer other constructors.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri">
+            <summary>
+            Base URI for the service against which the authenticated client can perform API calls.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.AuthenticationMetadataUri">
+            <summary>
+            URI for the service where clients can request dSTS authentication metdata.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.GetAsync(System.String)">
+            <summary>
+            Performs a GET operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the GET operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.GetStringAsync(System.String)">
+            <summary>
+            Performs a GET operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the GET operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <returns>The requested content from the service as a string.</returns>
+            <exception cref="T:System.Exception">Thrown when the service returns an error response.</exception>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.GetAsync``1(System.String)">
+            <summary>
+            Performs a GET operation on the given URI.
+            </summary>
+            <typeparam name="T">The JSON-serializable object type to GET from the service.</typeparam>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the GET operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <returns>The requested object from the service.</returns>
+            <exception cref="T:System.Exception">Thrown when the service returns an error response.</exception>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PutAsync(System.String,System.Object,System.Boolean)">
+            <summary>
+            Performs a PUT operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the PUT operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to PUT on the service.</param>
+            <param name="throwOnError">Determines if an exception should be thrown when the server returns an error.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PutAsync(System.String,System.Boolean)">
+            <summary>
+            Performs a PUT operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the PUT operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="throwOnError">Determines if an exception should be thrown when the server returns an error.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PostMultipartAsync(System.String,System.Object,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Performs a POST operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the POST operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to PUT on the service.</param>
+            <param name="dataName">The multipart content name to use for the data object.</param>
+            <param name="paths">The paths of the files to upload.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PutMultipartAsync(System.String,System.Object,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Performs a PUT operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the PUT operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to PUT on the service.</param>
+            <param name="dataName">The multipart content name to use for the data object.</param>
+            /// <param name="paths">The paths of the files to upload.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PostAsync``1(System.String,System.Object)">
+            <summary>
+            Performs a POST operation on the given query.
+            Takes an object as parameter for the query
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the GET operation should be performed.
+            <paramref name="data">Object acting as parameter for the query</paramref>
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object acting as the query parameter.</param>
+            <returns>The response object from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PutAsync``1(System.String,System.Object)">
+            <summary>
+            Performs a PUT operation on the given query.
+            Takes an object as parameter for the query
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the GET operation should be performed.
+            <paramref name="data">Object acting as parameter for the query</paramref>
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object acting as the query parameter.</param>
+            <returns>The response object from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PostAsync(System.String,System.Object,System.Boolean)">
+            <summary>
+            Performs a POST operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the POST operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to POST to the service.</param>
+            <param name="throwOnError">Determines if an exception should be thrown when the server returns an error.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.DeleteAsync``1(System.String,System.Object)">
+            <summary>
+            Performs a DELETE operation on the given query.
+            Takes an object as parameter for the query
+            </summary>
+            <typeparam name="T">The JSON-serializable object type to parse from DELETE response from the service.</typeparam>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the DELETE operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to DELETE to the service.</param>
+            <returns>The requested object from the service.</returns>
+            <exception cref="T:System.Exception">Thrown when the service returns an error response.</exception>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.DeleteAsync(System.String,System.Object)">
+            <summary>
+            Performs a DELETE operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the DELETE operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to DELETE to the service.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PostMultipartAsync``1(System.String,System.Object,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Performs a POST operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the POST operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to PUT on the service.</param>
+            <param name="dataName">The multipart content name to use for the data object.</param>
+            <param name="paths">The paths of the files to upload.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.PutMultipartAsync``1(System.String,System.Object,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Performs a PUT operation on the given URI.
+            </summary>
+            <param name="query">URI string relative to <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/> where the PUT operation should be performed.
+            Note: if <see paramref="query"/> contains a leading forward slash, the request will be made relative to the service's base URI
+            rather than <see cref="P:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.ApiUri"/>.</param>
+            <param name="data">The JSON-serializable object to PUT on the service.</param>
+            <param name="dataName">The multipart content name to use for the data object.</param>
+            /// <param name="paths">The paths of the files to upload.</param>
+            <returns>The response from the service.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.Dispose">
+            <summary>
+            Disposes this instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext.Dispose(System.Boolean)">
+            <summary>
+            Disposes this instance.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.Get(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="waitForCompletion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetPendingApprovalByServiceAsync(System.String)">
+            <summary>
+            Get configuration requests pending approval by the given service tree id
+            </summary>
+            <param name="serviceTreeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.DelegateApprovalAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail},System.Boolean)">
+            <summary>
+            Delegates the configuration request approval to one or more stakeholder services.
+            </summary>
+            <param name="configurationRequestId">Configuration Request Id.</param>
+            <param name="approvalDelegationDetails">Approval delgation details.</param>
+            <param name="delegatingServiceTreeId">Service Tree Id of the service that is delegating this approval.</param>
+            <param name="retainStakeholderRights">
+            Determines if the delegating service should continue to hold stakeholder rights that allows approval/rejection/approval-delegation of configuration request.
+            If this is set to true, configuration request would require approval from delegating service.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceAccountChangeListAsync(System.String)">
+            <summary>
+            Gets Service account change list for the given update service account configuration request id.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceAccountGroupChangeListAsync(System.String)">
+            <summary>
+            Gets Service account group change list for the given update service account group configuration request id.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceClientIdentityChangeListAsync(System.String)">
+            <summary>
+            Gets Service client identity change list for the given update service client identity configuration request id.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceClientIdentityGroupChangeListAsync(System.String)">
+            <summary>
+            Gets Service client identity group change list for the given update service client identity group configuration request id.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceClientIdentitiesAddedAsync(System.String)">
+            <summary>
+            Gets Service client identities that were added in the given AddServiceClientIdentities configuration request.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns>Collection of ServiceClientIdentity</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.GetServiceClientIdentitiesRemovedAsync(System.String)">
+            <summary>
+            Gets Service client identities that were removed in the given RemoveServiceClientIdentity configuration request.
+            </summary>
+            <param name="configurationRequestId">Configuration request id</param>
+            <returns>Collection of ServiceClientIdentity</returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.IConfigurationRequestProxy.DenyAsync(System.String,System.String)">
+            <summary>
+            Deny a configuration request.
+            </summary>
+            <param name="id">The ID of the configuration request to deny.</param>
+            <param name="reason">Reason to deny configuration request.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.IDscmProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.IDscmProxy.ConfigurationRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.IDscmProxy.TimeoutSeconds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy)">
+            <summary>
+            
+            </summary>
+            <param name="dscmProxy"></param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.Get(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="waitForCompletion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetPendingApprovalByServiceAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceAccountChangeListAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceAccountGroupChangeListAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceClientIdentityChangeListAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceClientIdentityGroupChangeListAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceClientIdentitiesAddedAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.GetServiceClientIdentitiesRemovedAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.DenyAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.ConfigurationRequestProxy.DelegateApprovalAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.Helpers.SemaphoreSlimExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Threading.SemaphoreSlim"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Helpers.SemaphoreSlimExtensions.WaitAsyncAndRunAsync(System.Threading.SemaphoreSlim,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Asynchronously waits on the semaphore before running the specified asynchronous function.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Helpers.SemaphoreSlimExtensions.WaitAsyncAndRun(System.Threading.SemaphoreSlim,System.Action)">
+            <summary>
+            Asynchronously waits on the semaphore before running the specified function.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.Helpers.SemaphoreSlimExtensions.WaitIfAsyncAndRun(System.Threading.SemaphoreSlim,System.Func{System.Boolean},System.Action)">
+            <summary>
+            If <paramref name="lockPredicate"/> returns true, asynchronously waits on the semaphore before running the specified function.
+            Else, runs the specified function without waiting on the semaphore.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName">
+            <summary>
+            Friendly cloud names for APIs
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Test">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Public">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Blackforest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Mooncake">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Fairfax">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Client.FriendlyCloudName.Nctest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ActiveContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="activeContext">The authenticated context to use for communication with the dSCM endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Uri,System.IdentityModel.Tokens.SecurityToken,Microsoft.WindowsAzure.Security.Authentication.X509CertCredentialType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="certificate">the X509 certificate to use for authentication.</param>
+            <param name="clientHomeStsEndpoint">The client's home dSTS certificate endpoint. eg: https://{dsts dns}/v2/wstrust/13/certificate</param>
+            <param name="actAsToken">ActAs security token</param>
+            <param name="certCredentialType">The type of certificate-based dSTS authentication to perform.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.String,System.IdentityModel.Tokens.SecurityToken)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="msiName">The name of the dSTS managed service identity to use for authentication.</param>
+            <param name="actAsToken"></param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.WindowsAzure.Security.Authentication.Contracts.IClientCredential,Microsoft.Azure.Security.ConfigurationManagement.Client.Authentication.ServiceEnvironment,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="clientCredential">The client credential to use for authentication.</param>
+            <param name="environment">The dSCM endpoint against which to authenticate.</param>
+            <param name="httpClient">The HttpClient to use for network communication with the dSCM service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.#ctor(Microsoft.WindowsAzure.Security.Authentication.Contracts.IClientCredential,System.String,System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy"/> class.
+            </summary>
+            <param name="clientCredential">The client credential to use for authentication.</param>
+            <param name="endpoint">The dSCM endpoint against which to authenticate.</param>
+            <param name="serviceName">
+            The service name component of dSCM's dSTS realm.
+            For example if the full realm is "svc://dscm@dscm.core.windows.net" then this value would be "dscm".
+            </param>
+            <param name="httpClient">The HttpClient to use for network communication with the dSCM service.</param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.Finalize">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.ConfigurationRequest">
+            <summary>
+            Provides functionality for querying configuration requests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.TimeoutSeconds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.AuthenticationContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.WaitForConfigurationRequestCompletion(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Client.DscmProxy.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+    </members>
+</doc>

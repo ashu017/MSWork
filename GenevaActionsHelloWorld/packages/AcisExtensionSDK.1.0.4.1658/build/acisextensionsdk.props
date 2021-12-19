@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>    
+        <AcisExtensionSDKDir Condition="'$(AcisExtensionSDKDir)'==''">$(MSBuildThisFileDirectory)..</AcisExtensionSDKDir>
+        <WapdSMEPackageManager Condition="'$(WapdSMEPackageManager)'==''">$(AcisExtensionSDKDir)\tools\WapdSMEPackageManager_x64.exe</WapdSMEPackageManager>
+        <WapdSMEClientManager Condition="'$(WapdSMEClientManager)'==''">$(AcisExtensionSDKDir)\tools\WapdSMEClientManager_x64.exe</WapdSMEClientManager>
+        <GASMEPackageInputDir Condition="'$(GASMEPackageInputDir)'==''">$(MSBuildProjectDirectory)\$(OutputPath)</GASMEPackageInputDir>
+        <GASMEPackageOutputDir Condition="'$(GASMEPackageOutputDir)'==''">$(MSBuildProjectDirectory)\bin\GenevaActionPackages</GASMEPackageOutputDir>
+        <GAPackageName Condition="'$(GAPackageName)'==''">$(AssemblyName)</GAPackageName>
+        <GASMEAssembly Condition="'$(GASMEAssembly)'==''">$(AssemblyName).dll</GASMEAssembly>
+    </PropertyGroup>  
+    <ItemDefinitionGroup>
+        <GAPackageEnvironment>
+            <InputDir>$(GASMEPackageInputDir)</InputDir>
+            <OutputDir>$(GASMEPackageOutputDir)</OutputDir>
+        </GAPackageEnvironment>
+    </ItemDefinitionGroup>
+</Project>
+
+ 

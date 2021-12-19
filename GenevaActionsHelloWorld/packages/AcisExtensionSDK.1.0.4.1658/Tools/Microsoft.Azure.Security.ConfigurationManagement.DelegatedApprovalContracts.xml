@@ -1,0 +1,2271 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.Security.ConfigurationManagement.DelegatedApprovalContracts</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail">
+            <summary>
+            Configuration request approval delegation details.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail.ServiceTreeId">
+            <summary>
+            Service Tree Id of the service to which the approval is being delegated to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail.Message">
+            <summary>
+            Message to the approver that contains information on what to review/approve.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DelegatedApprovalStakeholderDetail.MinimumNumberOfApproversRequired">
+            <summary>
+            Minimum number of approvals required from this service. Value should be between 1 and 10 (inclusive). Default value is 1.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassificationFilter">
+            <summary>
+            Filter to query Error Classification rules
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassificationFilter.RequestType">
+            <summary>
+            Return error classes applicable to specified RequestType
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassificationFilter.ErrorMessage">
+            <summary>
+            Filter error classes applicable to specified ErrorMessage 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassificationFilter.StackTrace">
+            <summary>
+            Filter error classes applicable to specified StackTrace
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassificationFilter.ExceptionJson">
+            <summary>
+            Filter error classes applicable to specified Exception
+            Specify a serialized Exception Json
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.Id">
+            <summary>
+            Unique Id for the error classification definition
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.ConfigurationRequestType">
+            <summary>
+            Configuration Request Type - ConfigurationRequestType enum string value
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.ErrorMessagePattern">
+            <summary>
+            Regex pattern to match error message
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.StackTracePattern">
+            <summary>
+            Regex pattern to match stack trace
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.FailureType">
+            <summary>
+            Class of the failure - ConfigurationRequestFailureType enum string value
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.HelpMessage">
+            <summary>
+            Help Message to display to user when an error matches this classification
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ErrorClassification.Priority">
+            <summary>
+            In case of multiple classification matches for an error, higher priority classes take precedence
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment">
+            <summary>
+            Represents an Azure cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Public">
+            <summary>
+            The public cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Blackforest">
+            <summary>
+            The Blackforest cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Fairfax">
+            <summary>
+            The Fairfax cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Mooncake">
+            <summary>
+            The Mooncake cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.NcTest">
+            <summary>
+            The NcTest cloud environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Ex">
+            <summary>
+            Staging EX cloud environment
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CloudEnvironment.Rx">
+            <summary>
+            Staging RX cloud environment
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestFailureException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestFailureException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestFailureException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestFailureException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.PendingApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.Approved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.Denied">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.InProgress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.InProgressWithErrors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.Completed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.CompletedWithErrors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.Cancelled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.PendingCloudOperatorApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.CloudOperatorApproved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestState.CloudOperatorDenied">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddServiceAccountTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveServiceAccountTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateServiceAccountTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateServiceAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkAddServiceAccounts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveServiceAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RefreshFromDsts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.ReleaseSecurityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveSecurityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateDsmsRootFoldersWithSubscriptionIds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddServiceClientIdentities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveServiceClientIdentity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateServiceClientIdentity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddGlobalClaim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveGlobalClaim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateGlobalClaim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RolloverManagedServiceClientIdentity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateJitPolicies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DsmsCreateRootFolder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DsmsAddFolderWhitelist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateServiceAccountsBatch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DsmsNationalCloudApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.EnforceServiceAccountGroupProperties">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkAddServiceClientIdentities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddServiceClientIdentityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.EnforceServiceClientIdentityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateServiceClientIdentityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateAutomationAccountDetails">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkUpdateServiceAccounts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AmUpdateAccessPolicyMap">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateDsmsResourceWhitelist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateDsmsRootFolderAutoTagging">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DsmsUpdatePersistentAccessSecurityGroups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.EnableDelegatedAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DisableDelegatedAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AllowDelegatedAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RevokeDelegatedAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateDelegatedAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateJitResources">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.TransferServiceAccounts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.TransferServiceClientIdentities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkAddServiceClientIdentitiesToContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddContainerBasedServiceClientIdentityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveContainerBasedServiceClientIdentityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkMoveServiceClientIdentitiesToContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddContainersToNewRegion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddContainerBasedServiceAccountGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateContainerBasedServiceAccountGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveContainerBasedServiceAccountGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkMoveServiceAccountsToContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.BulkAddServiceAccountsToContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddClaimExpansions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveClaimExpansions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.TransferDsmsRootFolder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateJitDstsControlledResources">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.AddJitDstsControlledResources">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.RemoveJitDstsControlledResources">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.DsmsCreateAndWhitelistRootFolder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.OffboardService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateDualKeyApprovers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequestType.UpdateJitResourcePolicies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.ServiceTreeId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.CloudId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.ApprovalRecordId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.Created">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.LastModified">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.State">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.PercentComplete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ConfigurationRequest.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AccessLevelForService">
+            <summary>
+            Access level details for service 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AccessLevelForService.ServiceTreeId">
+            <summary>
+            Service tree id for which access level is defined
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AccessLevelForService.AccessLevel">
+            <summary>
+            Access level as string
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AutomationApprovalDetails">
+            <summary>
+            Automation approval details contract
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AutomationApprovalDetails.AutomationAccountName">
+            <summary>
+            Name of automation acccount name
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AutomationApprovalDetails.ServiceTreeId">
+            <summary>
+            Service tree id owning this automation account
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Dsts.AutomationApprovalDetails.AccessLevelDetailsPerService">
+            <summary>
+            Details of Access level details per service
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AddServiceAccountsToGroupRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AddServiceAccountsToGroupRequest.Regions">
+            <summary>
+            List of dSTS regions to add accounts to
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAvailabilityStrategy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAvailabilityStrategy.Global">
+            <summary>
+            Create Service Accounts on all global Dsts Instances
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAvailabilityStrategy.Regional">
+            <summary>
+            Create Service Accounts on all regional Dsts Instances
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAvailabilityStrategy.UserSpecifiedRegions">
+            <summary>
+            Create Service Accounts on specific regional Dsts Instances
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupRequest.ServiceAccountGroup">
+            <summary>
+            Service Account Group to be created
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupRequest.AvailabilityStrategy">
+            <summary>
+            Service Availability Strategy
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupRequest.Regions">
+            <summary>
+            Specific dSTS instances to create Service Accounts on
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupRequest.DstsControlledResourceUpdateRequest">
+            <summary>
+            Create Jit dSTS controlled resource with service account group.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupResponse.ConfigurationRequestId">
+            <summary>
+            Create Service Account Configuration Request Id
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountGroupResponse.ServiceAccountGroupId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsUpdatePersistentSecurityGroupsRequest">
+            <summary>
+            Represents a request to update persistent access SGs on a dSMS folder
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsUpdatePersistentSecurityGroupsRequest.DsmsFolderId">
+            <summary>
+            The id of the folder in cosmosDb
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsUpdatePersistentSecurityGroupsRequest.AddPersistentAccess">
+            <summary>
+            Persistent accesses to add
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsUpdatePersistentSecurityGroupsRequest.RemovePersistentAccess">
+            <summary>
+            Persistent accesses to remove
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsPersistentAccessSecurityGroupDetails">
+            <summary>
+            Represents a change of persistent access for an SG on a dSMS folder
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsPersistentAccessSecurityGroupDetails.SecurityGroup">
+            <summary>
+            The security group in question
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DsmsPersistentAccessSecurityGroupDetails.AccessLevel">
+            <summary>
+            The access level of that SG
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountsRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountsRequest.AccountChangeLists">
+            <summary>
+            List of service account changes by Service Account Id
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesRequest.AccountIds">
+            <summary>
+            List of Member Accounts to enforce the group properties on
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfStatus.ServiceAccountId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfStatus.IsCompatible">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfStatus.Errors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfStatus.AccountsChanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllServiceAccountsResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllServiceAccountsResponse.ServiceAccounts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllServiceAccountGroupsResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllServiceAccountGroupsResponse.ServiceAccountGroups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.EnforceServiceAccountGroupPropertiesWhatIfResponse.EnforceGroupPropertiesStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.IpRange">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.IpRange.FromIpAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.IpRange.ToIpAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.IpRange.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllSecurityGroupsResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetAllSecurityGroupsResponse.SecurityGroups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetSecurityGroupResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetSecurityGroupResponse.SecurityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.MoveServiceAccountsToGroupRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.MoveServiceAccountsToGroupRequest.AccountIds">
+            <summary>
+            List of Account Ids to be moved
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.MoveServiceAccountsToGroupRequest.AllowIncompatibleAccounts">
+            <summary>
+            Should allow any incompatible account be moved to the group
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.MoveServiceAccountsToGroupRequest.KeepExistingGroupClaimRules">
+            <summary>
+            This is only for container based group. 
+            Allow user to add existing container claim rules to sevice acount scope after moving to a new group.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsRequest.Groups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsRequest.RequesterName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsRequest.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ReleaseSecurityGroupsResponse.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupDetails">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupDetails.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupDetails.Sid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupDetails.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupDetails.Federation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList">
+            <summary>
+            Represents a dSTS service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.AddRealms">
+            <summary>
+            The realms to add to the service account. <para/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.RemoveRealms">
+            <summary>
+            The realms to remove from to the service account. <para/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.AddClaimMappings">
+            <summary>
+            The claim mappings to add to the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.RemoveClaimMappings">
+            <summary>
+            The claim mappings to remove from the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.AddAuthenticationRequirements">
+            <summary>
+            The authentication requirements to add to the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.RemoveAuthenticationRequirements">
+            <summary>
+            The authentication requirements to remove from the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.AddAccountTags">
+            <summary>
+            The service account tags to add to the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountChangeList.RemoveAccountTags">
+            <summary>
+            The service account tags to remove from the service account.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem">
+            <summary>
+            Respresents a service account list view item
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.ServiceTreeID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.TemplateID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.SecurityTokenServiceInstance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.AccountName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.CloudId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountListViewItem.ExtensionData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup">
+            <summary>
+            Respresents a service account group
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.ServiceTreeId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.AccountName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.DisplayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.Realms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.ClaimMappings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.ContainerClaimMappings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.AuthenticationRequirements">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.CloudId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.AllowedActorIds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.ContainerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.JITResourceType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroup.AccountVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.UpdatedGroupName">
+            <summary>
+            Update the name of the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.AddRealms">
+            <summary>
+            The realms to add to the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.RemoveRealms">
+            <summary>
+            The realms to remove from to the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.AddClaimMappings">
+            <summary>
+            The claim mappings to add to the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.RemoveClaimMappings">
+            <summary>
+            The claim mappings to remove from the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.AddContainerClaimMappings">
+            <summary>
+            The claim mappings to add to the service account group container.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.RemoveContainerClaimMappings">
+            <summary>
+            The claim mappings to remove from the service account group container.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.AddAuthenticationRequirements">
+            <summary>
+            The authentication requirements to add to the service account group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccountGroupChangeList.RemoveAuthenticationRequirements">
+            <summary>
+            The authentication requirements to remove from the service account group.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DenyConfigurationRequestRequest">
+            <summary>
+            Contract to describe configuration request denial request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.DenyConfigurationRequestRequest.Reason">
+            <summary>
+            Reason to deny configuration request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ApprovalDelegationRequest">
+            <summary>
+            Represent request to delegate configuration request approval.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ApprovalDelegationRequest.DelegationApproverDetails">
+            <summary>
+            Stakeholder Details to whom the request must be delegated to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ApprovalDelegationRequest.DelegatingServiceTreeId">
+            <summary>
+            Service Tree ID of the service that is delegating the request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ApprovalDelegationRequest.RetainStakeholderRights">
+            <summary>
+            <para>Determines if the delegating service should continue to hold stakeholder rights that allows approval/rejection/approval-delegation of configuration request.</para>
+            <para>If this is set to true, configuration request would require approval from delegating service.</para>
+            <para>If this is set to false, delegating service would no longer be a stakeholder on the configuration request and cannot approve/reject/delegate this configuration request.</para>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetConfigurationRequestRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetConfigurationRequestRequest.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetConfigurationRequestResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetConfigurationRequestResponse.ConfigurationRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.Get">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.Get.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetConfigurationRequests">
+            <summary>
+            Get configuration requests.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.DelegateApproval">
+            <summary>
+            Delegate configuration request approval.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceAccountChanges">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceAccountChanges.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceAccountGroupChanges">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceAccountGroupChanges.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceClientIdentityChanges">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceClientIdentityChanges.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceClientIdentityGroupChanges">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceClientIdentityGroupChanges.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceClientIdentitiesAdded">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceClientIdentitiesAdded.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.GetServiceClientIdentitiesRemoved">
+            <summary>
+            Parameter 1: configuration request ID <para/>
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ConfigurationRequest.GetServiceClientIdentitiesRemoved.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ConfigurationRequest.Deny">
+            <summary>
+            Deny configuration request
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsms.PersistentAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.SecurityGroups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.SecurityGroups.Release">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.SecurityGroups.Default">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Default">
+            <summary>
+            Default Url to the list of Service Accounts.
+            Optional Query Parameters for the accounts: serviceId, templateId, dstsInstance, cloudId
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.GetFiltered">
+            <summary>
+            REST Url to fetch a filtered set of service accounts
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.ById">
+            <summary>
+            REST Url to a Service Account by Id.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.ApplyChanges">
+            <summary>
+            REST Url to apply changes to a Service Account
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Create">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Get">
+            <summary>
+            Parameter 1: service account ID <para/> 
+            Example: <para/>
+            <code>
+            var requestUrl = RestUrlFor.Dsts.ServiceAccount.Get.Replace("{id}", "4265e3a3-6dff-4069-b612-9c5995b51094");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Transfer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.Count">
+            <summary>
+            Get the count of service accounts in dSCM.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccount.List">
+            <summary>
+            Get a summarized list of service accounts. Not all data is returned so this should not be used to make changes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup">
+            <summary>
+            REST Urls for ServiceAccountGroup
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.Default">
+            <summary>
+            Default Url to the list of Service Account Groups
+            Optional Query Parameters: serviceId
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.ById">
+            <summary>
+            REST Url to a Service Account Group by Id
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.ApplyChanges">
+            <summary>
+            REST Url to apply changes to Service Account Group
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.EnforceProperties">
+            <summary>
+            REST Url to enforce a group properties to the member Service Accounts
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.EnforcePropertiesWhatIf">
+            <summary>
+            REST Url to query changes that will result from enforcing this group properties on a list of Service Accounts
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.MoveAccounts">
+            <summary>
+            REST Url to move existing Service Accounts to this group. This is only a metadata update
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.AddAccounts">
+            <summary>
+            REST Url to add new Service Accounts to the group
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.UpdateAccounts">
+            <summary>
+            REST Url to update Service Accounts of the group
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.Metadata">
+            <summary>
+            REST Url to a Service Account Group Metadata
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.ApplyMetadataChanges">
+            <summary>
+            REST Url to apply changes to Service Account Group Metadata
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.AllowedActors">
+            <summary>
+            REST Url to get allowed actor IDs for a Service Account Group
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.AllowedActorsFull">
+            <summary>
+            REST Url to get allowed actors for a Service Account Group
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.Count">
+            <summary>
+            Get the count of service account groups in dSCM.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.MigrateContainer">
+            <summary>
+            REST Url to migrate Service Account Group Metadata to container based model
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.MoveAccountsToContainer">
+            <summary>
+            REST Url to move existing Service Accounts to this container based group. This move accounts to dsts container.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceAccountGroup.GetFiltered">
+            <summary>
+            REST Url to fetch a filtered set of service account groups
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity">
+            <summary>
+            REST URLs for ServiceClientIdentity
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.CreateManaged">
+            <summary>
+            REST URL to create ManagedServiceIdentity (MSI)
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.CreateCertificateBased">
+            <summary>
+            REST URL to create certificate based ServiceClientIdentity
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.GetById">
+            <summary>
+            REST URL to get ServiceClientIdentity
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.Count">
+            <summary>
+            Get the count of service client identity in dSCM.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.Create">
+            <summary>
+            REST URL to create ServiceClientIdentity
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.GetAll">
+            <summary>
+            REST URL to get all ServiceClientIdentities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentity.Update">
+            <summary>
+            REST URL to update ServiceClientIdentity
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup">
+            <summary>
+            REST URLs for ServiceClientIdentityGroup
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Default">
+            <summary>
+            Default Url to the list of Service Client Groups
+            Optional Query Parameters: serviceTreeId
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Metadata">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.AddGroupDefinedServiceClientIdentities">
+            <summary>
+            REST URL to create group defined service client identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.AddMemberDefinedServiceClientIdentities">
+            <summary>
+            REST URL to create group defined service client identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateManaged">
+            <summary>
+            REST URL for creating group that can contain only dmsi based identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateCertificateBased">
+            <summary>
+            REST URL for creating group that can contain only certificate based identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateSubjectNameBased">
+            <summary>
+            REST URL for creating group that can contain only subject name based identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateEmpty">
+            <summary>
+            REST URL for creating a Group with no defined properties
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateManagedWithGroupDefinedMembers">
+            <summary>
+            REST URL for creating managed group and group defined members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.CreateCertificateBasedWithGroupDefinedMembers">
+            <summary>
+            REST URL for creating certificate based group and group defined members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.EnforceProperties">
+            <summary>
+            REST URL for enforcing properties
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.EnforcePropertiesWhatIf">
+            <summary>
+            REST URL for enforce properties whatIf
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.ById">
+            <summary>
+            REST URL for getting group by Id
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Members">
+            <summary>
+            REST URL for getting group members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.MembersAsListViewItems">
+            <summary>
+            REST URL for getting group members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.UngroupedMembers">
+            <summary>
+            REST URL for getting ungrouped members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.UngroupedMembersAsListViewItems">
+            <summary>
+            REST URL for getting ungrouped members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Ungroup">
+            <summary>
+            REST URL for ungrouping
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.MoveServiceClientIdentities">
+            <summary>
+            REST URL for moving service client identities
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.UpdateMetadata">
+            <summary>
+            REST URL for updating group metadata
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Update">
+            <summary>
+            REST URL for updating group and it members
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.Count">
+            <summary>
+            Get the count of service client identity group in dSCM.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.ContainerBasedGroup">
+            <summary>
+            REST URL for removing group with container
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.Dsts.ServiceClientIdentityGroup.MoveServiceClientIdentitiesToContainer">
+            <summary>
+            REST URL for moving service client identities to container based group
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata">
+            <summary>
+            REST URLs for metdata on onboarded services.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.Get">
+            <summary>
+            Parameter 1: Service Tree ID <para /> 
+            Example: <para />
+            <code>
+            var requestUrl = RestUrlFor.ServiceMetadata.Get.Replace("{id}", "88f7245d-dd79-44a5-900a-46ca45cc7ce7");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.IsOnboarded">
+            <summary>
+            Parameter 1: Service Tree ID <para /> 
+            Example: <para />
+            <code>
+            var requestUrl = RestUrlFor.ServiceMetadata.IsOnboarded.Replace("{id}", "88f7245d-dd79-44a5-900a-46ca45cc7ce7");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.Onboard">
+            <summary>
+            Parameter 1: Service Tree ID <para /> 
+            Example: <para />
+            <code>
+            var requestUrl = RestUrlFor.ServiceMetadata.Onboard.Replace("{id}", "88f7245d-dd79-44a5-900a-46ca45cc7ce7");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.Offboard">
+            <summary>
+            Parameter 1: Service Tree ID <para /> 
+            Example: <para />
+            <code>
+            var requestUrl = RestUrlFor.ServiceMetadata.Offboard.Replace("{id}", "88f7245d-dd79-44a5-900a-46ca45cc7ce7");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.SyncOnboardedMetadataToServiceTree">
+            <summary>
+            Parameter 1: Service Tree ID <para /> 
+            Example: <para />
+            <code>
+            RestUrlFor.ServiceMetadata.SyncOnboardedMetadataToServiceTree .Replace("{id}", "88f7245d-dd79-44a5-900a-46ca45cc7ce7");
+            </code>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.RestUrlFor.ServiceMetadata.OnboardNew">
+            <summary>
+            <code>
+            var requestUrl = RestUrlFor.ServiceMetadata.OnboardNew;
+            </code>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseError">
+            <summary>
+            ResponseStatus for Contracts
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseError.ErrorCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseError.FieldName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseError.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus">
+            <summary>
+            ResponseStatus for Contracts
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="message"></param>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.ErrorCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.StackTrace">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ResponseStatus.Errors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountRequest.ServiceAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountResponse.ConfigurationRequestId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.CreateServiceAccountResponse.ServiceAccountId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetServiceAccountResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetServiceAccountResponse.ServiceAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountRequest.ServiceAccountId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountRequest.Realms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountRequest.ClaimMappings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountRequest.AuthenticationRequirements">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.UpdateServiceAccountResponse.ConfigurationRequestId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AuthenticationRequirement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AuthenticationRequirement.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AuthenticationRequirement.RequiredIpRanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.AuthenticationRequirement.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Claim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Claim.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Claim.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Claim.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping.Federation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping.InputClaim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping.OutputClaim">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping.ExpirationTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ClaimMapping.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Realm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Realm.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Realm.RedirectionUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Realm.TokenLifetimeSeconds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.Realm.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroup.Name">
+            <summary>
+            
+            </summary>
+            
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroup.Federation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount">
+            <summary>
+            Represents a dSTS service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.Id">
+            <summary>
+            Service account GUID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.ServiceTreeId">
+            <summary>
+            Service Tree GUID of the service who owns the service acccount.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.GroupId">
+            <summary>
+            Optional. GUID of the dSCM service account group to which the service account
+            belongs. <para />
+            If null or empty, the service account will be created under the service's
+            default group.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.CloudId">
+            <summary>
+            An identifier representing the cloud where the service account resides.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.DstsInstance">
+            <summary>
+            The dSTS instance where the service account resides.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.AccountName">
+            <summary>
+            The name of the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.DisplayName">
+            <summary>
+            Optional. The display name of the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.Realms">
+            <summary>
+            The realms of the service account. <para/>
+            At least one realm is required.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.ClaimMappings">
+            <summary>
+            Optional. The claim mappings which apply to this service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.AuthenticationRequirements">
+            <summary>
+            Optional. The authentication requirements for the service account.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.AccountTags">
+            <summary>
+            Tags for the service account
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.AccountVersion">
+            <summary>
+            dSTS account version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceAccount.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailureType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailureType.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailureType.Warning">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationException.#ctor(System.Collections.Generic.List{Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure})">
+            <summary>
+            
+            </summary>
+            <param name="validationFailures"></param>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationException.ValidationFailures">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure.ValidationFailedReason">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SecurityGroupValidationFailure.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData">
+            <summary>
+            Information related to an individual search scope
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData.Scope">
+            <summary>
+            The scope name
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData.Description">
+            <summary>
+            The UI-friendly version of the scope's name
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData.Hint">
+            <summary>
+            The hint given to a user on how to format the input of the search scope
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData.Header">
+            <summary>
+            The brief description/explanation of the search scope
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchDimensionData.ResultsHeader">
+            <summary>
+            The type of results returned from the search scope
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchPartition">
+            <summary>
+            A logical partition of search scopes (e.g. based on the search parameter or result type)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchPartition.PartitionLabel">
+            <summary>
+            Name of partition
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchPartition.SearchDimensions">
+            <summary>
+            The search scopes within a partition
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceDropdownData">
+            <summary>
+            Data to be sent to the front-end to define the scopes available to the search feature
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceDropdownData.SearchPartitions">
+            <summary>
+            A list of partitions that logically separate search scopes
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.SecurityGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.ServiceAccountDirect">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.Thumbprint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.SubjectName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.Realm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.SecurityGroupJit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.ServiceAccountJit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.ServiceAccountUnscoped">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceSearchScope.SearchScope.ServiceAccountCrossRegion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata">
+            <summary>
+            Represents metadata for an onboarded service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.Id">
+            <summary>
+            Service Tree ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.Name">
+            <summary>
+            Friendly name of the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.Owners">
+            <summary>
+            User principals who are the owners of this service.  <para />
+            Currently, service owners have the same permissions as service approvers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.Approvers">
+            <summary>
+            Principals who can approve configuration requests for this service. <para />
+            This list can contain user principals and group principals.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.NotificationRecipients">
+            <summary>
+            Email addresses for which notifications are sent for this service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.DevOwners">
+            <summary>
+            Dev Owners of the service as provided in service tree.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.PmOwners">
+            <summary>
+            Pm Owners of the service as provided in service tree.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.AdminAliases">
+            <summary>
+            Admin Alias of the service as provided in service tree.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.ServiceMetadata.ExtensionData">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult">
+            <summary>
+            Flexible DataContract that can take properties from other
+            data models (e.g. Service Accounts and SCIs)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.Type">
+            <summary>
+            Indicates the previous data model the information is based on
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.ID">
+            <summary>
+            The unique GUID associated with a document
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.Name">
+            <summary>
+            The name of the specified object (the name of the object declared in Type)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.ServiceTreeID">
+            <summary>
+            The service tree ID associated with an object (may not be applicable for all Types)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.DstsInstance">
+            <summary>
+            The dSTS instance that the object is on
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.GroupID">
+            <summary>
+            The Group ID associated with an object (may also be referred to as Template ID)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.SearchResourceResult.OutputClaims">
+            <summary>
+            The output claims associated with an object (may not be applicable for all Types)
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetSearchResourceResultResponse">
+            <summary>
+            Container for a list of ResourceResults
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetSearchResourceResultResponse.ResourceResults">
+            <summary>
+            List containing ResourceResults
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.Security.ConfigurationManagement.Contracts.GetSearchResourceResultResponse.JitPolicySetResults">
+            <summary>
+            List containing relevant JitPolicyResults
+            </summary>
+        </member>
+    </members>
+</doc>

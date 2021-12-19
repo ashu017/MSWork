@@ -1,0 +1,3143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WindowsAzure.Wapd.Acis.Contracts</name>
+    </assembly>
+    <members>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AbstractBaseClasses.AcisCascadeParameter.DependsOn">
+            <summary>
+            Get the list of paramters it needs to run the operation
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AbstractBaseClasses.AcisCascadeParameter.DynamicParameterValues(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint,Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Gets the parameter values. Override this in order to write your custom logic.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension">
+            <summary>
+            The abstract base class for all IAcisServiceManagementExtensions.  Client extensions should implement this.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.ExtensionVersion">
+            <summary>
+            Gets the extension's version name.  By default tries to read it from the assembly, though can optionally be overridden by clients.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.ServiceName">
+            <summary>
+            Gets the extension's service name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.OnLoad">
+            <summary>
+            Called by ACIS at load time.  Should return whether loading succeeded or failed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.OnEndpointCreate(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint)">
+            <summary>
+            Called by ACIS upon loading a specific endpoint from config.  Should return whether initialization succeeded or failed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.Endpoints">
+            <summary>
+            The supported (loaded) endpoints.  Will be filled out by the infrastructure at load time (i.e., a simple get; set; implementation is fine).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.Parameters">
+            <summary>
+            The full list of declared parameters.  Will be filled out by the infrastructure at load time (i.e., a simple get; set; implementation is fine).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.Logger">
+            <summary>
+            Gets an instance of the logger.  This will be set prior to any functions being called (although it will not be initialized in the constructor; for any initialization time logic, use OnLoad)
+            when running in ACIS context.  For test purposes, your test code can set it to an instance of AcisSMEConsoleLogger (or other logger implementation if desired).
+            In other words, your client library itself should not set this, only external sources (your test code, our ACIS code).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.Configuration">
+            <summary>
+            Gets the configuration of the extension.  Will be set by ACIS prior to any functions being called (i.e., a simple get; set implementation is fine).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.ExtensionEnvironment">
+            <summary>
+            Gets the extension environment.  Will bet set by ACIS prior to any functions being called.  i.e., a simple get; set; implementation is fine.
+            Do not do an actual implementation beyond that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.Certificates">
+            <summary>
+            Gets the certificates specified by the configuration.  Will be set by ACIS prior to any functions being called.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.ClientToolsVersion">
+            <summary>
+            Gets or sets the client tools version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisServiceManagementExtension.ResourceTypes">
+            <summary>
+            Gets the extension's resource type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation">
+            <summary>
+            AcisSMEOperation provides a basic level of default functionality for operations to make it easier for client libraries.  See also the various implementers
+            for further simplifying implementations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.OperationKey">
+            <summary>
+            Short, simplified name for operation.  Used to identify the operation, and is exposed in command-line interfaces.  No non-alphanumeric characters permitted (no spaces, etc.)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.OperationName">
+            <summary>
+            Gets the operation name that is displayed to the user in the UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.HelpText">
+            <summary>
+            Gets the help text for the operation which will be displayed in the Actions portal.
+            This supports markdown (https://en.wikipedia.org/wiki/Markdown for more information).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.OperationGroup">
+            <summary>
+            Gets the operation group this operation is part of.
+            Can return something like new ExampleOperationGroup();
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.ClaimsRequired">
+            <summary>
+            Gets a list of claims required for the operation; any one of the claims specified is sufficient permission for the operation.
+            Operation will be executed directly without additional approval from a sovereign cloud operator if one of those claims is present.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.PrivilegeLevel">
+             <summary>
+             Gets the privilege level for the operation, which determines whether it can be run
+             by the user, or whether it requires approval or is for national cloud operators only.
+            
+             This property is ignored when scoped claims are defined, as the privilege level is inferred from the claim.
+             For Delegated JIT Claims it will default to Standard access, but can be overridden for higher privilege levels.
+             </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.ExecutionMethod">
+             <summary>
+             The MethodInfo of the function to execute.  The function in question must have the same number of parameters as are returned by this.Parameters, with the exception of "known" ACIS build parameters:
+             parameters of type IAcisSMEOperationProgressUpdater, IAcisSMEEndpoint, IAcisServiceManagementExtension, and OperationExecutionContext will all be filled out by the appropriate value without
+             a corresponding Parameter value.
+            
+             The function must return an IAcisSMEOperationResponse.
+             </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.CustomerData">
+            <summary>
+            Specifies the level of access the operation has to customer data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.EndUserMetadata">
+            <summary>
+            Specifies the level of access the operation has to end-user metadata data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.AccessControlData">
+            <summary>
+            Specifies the level of access the operation has to access control data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.PaymentInformation">
+            <summary>
+            Specifies the level of access the operation has to payment information
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.AdministratorData">
+            <summary>
+            Specifies the level of access the operation has to administrator data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.SystemMetadata">
+            <summary>
+            Specifies the level of access the operation has to system metadata
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.Parameters">
+            <summary>
+            Gets the list of parameters that apply to this operation
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.Metadata">
+            <summary>
+            Gets metadata for the operation which can be used for access determinations by the access control engine.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.ContainingExtension">
+            <summary>
+            Gets or sets the containing service management extension.  This will be populated by the infrastructure.
+            (i.e., a simple get; set; implementation is fine).  Client library code should not set this.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.IsIdempotent">
+            <summary>
+            Implemented by SME operations to specify if the operation is idempotent. Idempotent operations should be
+            safe for multiple retries. Acis portal could retry idempotent operations on failure.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.OperationRenderType">
+            <summary>
+            Gets the type of the output to be rendered (based off (int)OutputRenderType.{type})
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.TemplateName">
+            <summary>
+            Gets the name of the output template.  Only used if the output render type is Template.
+            Default AcisSMEOperation implementation is null, which MUST be overridden if the output type is Template.  This will be a validation error if not overridden by a Template render type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.DisallowedContexts">
+            <summary>
+            This is no longer used, but it remains in this class for compatibility
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.DataModelRowPropertyInfo">
+            <summary>
+            Gets the propertyinfo for the property on the return type that will represent the collection of rows to be rendered.
+            In the case of non-UI operations, this is unused.
+            In the case of UI operations, this must match a property on the typeparam of the IAcisSMEOperationResponse that gets returned.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.IsHighRiskOperation">
+            <summary>
+            Gets a boolean value indicating whether this operation is considered extremely high risk to a service/platform. If set, AcisPortal will display warning message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperation.IsApprovalRequired">
+            <summary>
+            Determines if the operation will be forced to go through approval service or not
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationGroup">
+            <summary>
+            Represents an operation group in the UI.  This class should be extended (once per operation group), and will in turn be used by SMEOperation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationGroup.Name">
+            <summary>
+            The name (displayed in the UI)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationGroup.DisallowedEndpoints">
+            <summary>
+            Allows the disabling of operations on specific endpoint types.  May be used to have operations that are specific to a type of endpoint.
+            The string value should equal the identifier of the endpoint in the config file.
+            
+            By default, all operation groups apply to all endpoint types.  Override this value to change that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.Key">
+            <summary>
+            Gets the short-name or ID form used to identify this parameter.  This name is surfaced in command-line interfaces.
+            This value must be all lower-case alphanumeric, with no spaces or punctuation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.Name">
+            <summary>
+            Full parameter name, displayed in the ACIS UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.HelpText">
+            <summary>
+            Gets the help text (HTML supported; displayed in the UI when the user clicks the help button.  Leave null for no help button for this parameter)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.ValidationArgs">
+            <summary>
+            The validation arguments.  Used to provide things like int range.
+            May be overridden by ValidationArgs in IAcisSMEParameterRef
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.HasSecretInformation">
+            <summary>
+            Gets a value indicating whether this parameter (may) contain secret information.
+            If true, the value of this parameter will not be logged in auditing in plain text, but rather in an encrypted form.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.IsParameterValid(System.String,System.String,System.Object@,System.String@)">
+            <summary>
+            Only called if "Custom" validation type is provided.  The validationArgs may be equivalent to the ValidationArgs of this class, but ParameterRefs can override it, so
+            the validationArgs that are passed in should be used instead of the instance member.
+            Use correctedValue if there's a specific return type that you want to use. Leave null (i.e., don't modify the value) if there's no specific value.
+            Use errorMessage if there's an error message you want to output.  This value will only be used if IsParameterValid returns false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.ContainingExtension">
+            <summary>
+            Gets or sets the containing extension.  This should be implemented as a simple get; set; property by the parameter, as it will be set prior to calling any functions.
+            Do not use it during the constructor, as it will be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEParameter.Category">
+            <summary>
+            Category of parameter. Most of the parameters will be default and dont need to be overridden but can have special category e.g. ResourceScope
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.DsmsSecretBase.SourceLocation">
+            <summary>
+            The actual source path of a secret with respect to dsms
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountInfo.AccountName">
+            <summary>
+            Name of the storage account in azure
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountInfo.Type">
+            <summary>
+            Type of the storage account secret retrieved from dsms
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountInfo.Versions">
+            <summary>
+            different versions of a storage account secret where 1 corresponds to the latest 
+            secret while 2 corresponds to the one before it and so on
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountInfo.Currrent">
+            <summary>
+            Returns the latest version of the storage account secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountInfo.Previous">
+            <summary>
+            Returns the storage account secret previous to the latest version
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountVersion.Version">
+            <summary>
+            Version number of the secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageAccountVersion.Secret">
+            <summary>
+            The actual retrieved from dsms
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.StorageInfoType">
+            <summary>
+            Defines the type of storage info secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.ShouldInstall">
+            <summary>
+            Whether the cert needs to be installed or not
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.IdentityName">
+            <summary>
+            The name of the service identity
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.DstsNames">
+            <summary>
+            The dsts endpoints to which the identity cert can auth to
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.Versions">
+            <summary>
+            The different versions of the identity certificate where 1 corresponds to the
+            latest secret, 2 corresponds to the one before it and so on
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.Current">
+            <summary>
+            Return the latest version of the service identity secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityInfo.Previous">
+            <summary>
+            Returns the service identity secret previous to the latest version
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityVersion.Version">
+            <summary>
+            Version number of the secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.ServiceIdentityVersion.IdentityCert">
+            <summary>
+            The identity certificate used to auth to the dsts endpoints
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretInfo.Versions">
+            <summary>
+            The different versions of the adhoc secret where 1 corresponds to the
+            latest secret, 2 corresponds to the one before it and so on
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretInfo.Type">
+            <summary>
+            Type of the adhoc secret retrieved from dsms
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretInfo.Current">
+            <summary>
+            Return the latest version of the adhoc secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretInfo.Previous">
+            <summary>
+            Returns the adhoc secret previous to the latest version
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretVersion.Version">
+            <summary>
+            Version number of the secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretVersion.Secret">
+            <summary>
+            The actual secret
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.AdHocSecretType">
+            <summary>
+            Defines the type of adhoc secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateInfo.ShouldInstall">
+            <summary>
+            Whether the cert needs to be installed or not
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateInfo.Versions">
+            <summary>
+            The different versions of the certificate where 1 corresponds to the
+            latest secret, 2 corresponds to the one before it and so on
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateInfo.Current">
+            <summary>
+            Return the latest version of the certificate
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateInfo.Previous">
+            <summary>
+            Returns the certificate previous to the latest version
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateVersion.Version">
+            <summary>
+            Version number of the secret
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisDsmsSecretContracts.CertificateVersion.Certificate">
+            <summary>
+            Certificate version corresponding to the version number
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger">
+            <summary>
+            A simple implementation of IAcisSMELogger that can be used for debugging purposes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.LogVerbose(System.String)">
+            <summary>
+            Logs a verbose-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.LogInfo(System.String)">
+            <summary>
+            Logs an info-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.LogWarning(System.String)">
+            <summary>
+            Logs a warning-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.LogError(System.String)">
+            <summary>
+            Logs an error-level message
+            </summary>        
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.LogError(System.Exception,System.String)">
+            <summary>
+            Logs an error-level message
+            </summary>        
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.Write(System.String,System.String)">
+            <summary>
+            Writes the message to the console
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.IsVerboseEnabled">
+            <summary>
+            Gets a value indicating whether verbose logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.IsInfoEnabled">
+            <summary>
+            Gets a value indicating whether info logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.IsWarningEnabled">
+            <summary>
+            Gets a value indicating whether warning logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEConsoleLogger.IsErrorEnabled">
+            <summary>
+            Gets a value indicating whether error logging is enabled
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse">
+            <summary>
+            Provides a simple implementation of IAcisSMEOperationResponse.  Client libraries can either use this, or provide their own.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.SuccessResult">
+            <summary>
+            Gets the success result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.Result">
+            <summary>
+            Gets the result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.ContinuationToken">
+            <summary>
+            Continuation Token used to fetch more results, or to poll for results if none available yet.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.ProgressMessage">
+            <summary>
+            Progress messages from the underlying operation, intended to be displayed to the user.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.LogMessage">
+            <summary>
+            Gets the log message (or null for not logging any specific messages)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.ErrorMessage">
+            <summary>
+            Gets or sets the error message.  This property is ignored if result is non-null
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.FailureSource">
+            <summary>
+            Gets or sets the general location that initiated a failure.  Used for logging purposes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.GetUserConfirmation">
+            <summary>
+            Used to perform some validations and getting confirmation from user.
+            If user confirms, the operation is re-executed by setting the IsConfirmed property in the OperationExecutionContext
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse`1.ExecutionStartTime">
+            <summary>
+            Used to track the time Method got executed from reflection
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions">
+            <summary>
+            Extensions for ease-of-use of IAcisSmeOperationResponse.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.IsError(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse)">
+            <summary>
+            Gets whether the response is an error response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.ResultString(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse)">
+            <summary>
+            Gets the result as a string
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildException(System.Exception,System.String)">
+            <summary>
+            Factory method to build a standard failure response given that
+            the specified exception was thrown while attempting the operation.
+            </summary>
+            <param name="ex">The exception, which gives additional and more accurate details on the error message. </param>
+            <param name="messagePrefix">The specific message for the response.</param>
+            <returns>The acis response</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildTypedException``1(System.Exception,System.String)">
+            <summary>
+            Factory method to build a standard failure response given that
+            the specified exception was thrown while attempting the operation.
+            </summary>
+            <param name="ex">The exception, which gives additional and more accurate details on the error message. </param>
+            <param name="messagePrefix">The specific message for the response.</param>
+            <returns>The acis response</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildFailure(System.String)">
+            <summary>
+            Factory method to build a standard "operation failed" response.
+            This method assumes the operation failed due to internal/dependency issues
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildInvalidInputFailure(System.String)">
+            <summary>
+            Factory method to build an invalidinput failure response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildUnauthorizedFailure(System.String)">
+            <summary>
+            Factory method to build an Authentication failure response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildFailure(System.String,System.String)">
+            <summary>
+            Factory method to build a standard "Failure" response with HTML output
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildSystemFailure(System.String)">
+            <summary>
+            Factory method to build a standard "operation failed" response.
+            This method assumes the operation failed due to a system error
+            (i.e. not operation inputs-related - either in the extension or a downstream system).
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildTypedFailure``1(System.String)">
+            <summary>
+            Factory method to build a standard "operation failed" response.
+            This method assumes the operation failed due to inputs-related errors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildSuccess(System.Object)">
+            <summary>
+            Factory method to build a standard "Success" response
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildSuccess(System.String,System.String)">
+            <summary>
+            Factory method to build a standard "Success" response with html output
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.BuildTypedSuccess``1(``0)">
+            <summary>
+            Factory method to build a standard "Success" response
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardErrorResponse(System.Exception)">
+            <summary>
+            Provides an AcisSMEOperationResponse based on the details found in the given Exception.
+            The message returned to the user will be:
+            <code>
+                Operation Failed.
+                [Exception message here]
+            </code>
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardTypedErrorResponse``1(System.Exception)">
+            <summary>
+            Provides an AcisSMEOperationResponse based on the details found in the given Exception.
+            The message returned to the user will be:
+            <code>
+                Operation Failed.
+                [Exception message here]
+            </code>
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardErrorResponse(System.Exception,System.String)">
+            <summary>
+            Provides an AcisSMEOperationResponse based on the details found within the given Exception,
+            prefixed by the given message.  The message returned will be:
+            <code>
+                [errorPrefix message]
+                [Exception message here]
+            </code>
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardTypedErrorResponse``1(System.Exception,System.String)">
+            <summary>
+            Provides an AcisSMEOperationResponse based on the details found within the given Exception,
+            prefixed by the given message.  The message returned will be:
+            <code>
+                [errorPrefix message]
+                [Exception message here]
+            </code>
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SpecificErrorResponse(System.String,System.String)">
+            <summary>
+            Generates a OperationInternalFailure response with specific values for logging and user messaging
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SpecificTypedErrorResponse``1(System.String,System.String)">
+            <summary>
+            Generates a OperationInternalFailure response with specific values for logging and user messaging
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SpecificErrorResponse(System.String)">
+            <summary>
+            Generates a OperationInternalFailure response with the specified message used for both logging and user messaging.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SpecificTypedErrorResponse``1(System.String)">
+            <summary>
+            Generates a OperationInternalFailure response with the specified message used for both logging and user messaging.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardSuccessResponse(System.Object)">
+            <summary>
+            Generates a success response, providing the given object as the response content.
+            Defaults response content to "Success" if no response object provided.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StandardTypedSuccessResponse``1(``0)">
+            <summary>
+            Generates a success response, providing the given object as the response content.
+            Defaults response content to "Success" if no response object provided.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.DictionaryResponse(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates a success response where the dictionary key/value pairs are returned
+            one per line in <c>key: value</c> form.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.StringListResponse(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a success response where the provided strings are returned one per line
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SerializedListResponse``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Creates a response in which the result data is the given list of objects serialized
+            in XML format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.SerializedResponse``1(``0,System.String)">
+            <summary>
+            Creates a response in which the result data is given object serialized in XML format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponseExtensions.ToTypedResponse``1(Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEOperationResponse)">
+            <summary>
+            Converts an untyped response to a typed response
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESecurityGroup">
+            <summary>
+            Represents the common security groups for client operations
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim">
+            <summary>
+            Represents an ACIS user's claim.
+            NOTES:
+            1. Intended to be Immutable (exception being via serialization)
+            2. Claim Name is normalized by changing spaces to dashes for some claim types (groups and roles currently)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim"/> class.  Uses default type of group.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.Type">
+            <summary>
+            Claim Type; Reference values from AcisClaimTypes for valid/expected types
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.Name">
+            <summary>
+            Claim Name; The specific instance of a claim type.  Eg: "PlatformServiceViewer"
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.Issuer">
+            <summary>
+            Claim Issuer; The entity responsible for issuing this claim.
+            NOTES:
+            1. NOT serialized.
+            2. NOT passed to ACIS back-end processing.
+            3. NOT considered when performing claim comparisons.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.ValidityStartDate">
+            <summary>
+            The validity start date of the claim, if obtained from JIT.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.ValidityEndDate">
+            <summary>
+            The validity end date of the claim, if obtained from JIT.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.DelegatedJitClaim">
+            <summary>
+            The information about a JIT claim required by the endpoint.
+            This acts as a hint for smart clients like the UI to request JIT claims on
+            behalf of the user for their endpoint in scenarios where delegated authentication
+            is used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.IsSubsetOf(Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim[])">
+            <summary>
+            Determines whether this claim is a "subset" of any of the provided claims (e.g., if the provided claims are PlatformServiceOperator and PlatformServiceAdministrator, if this claim
+            is *-PlatformServiceAdministrator (like Antares-PlatformServiceAdministrator) then it is considered a subset of the arguments.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserClaim.NormalizeClaimName(System.String,System.String)">
+            <summary>
+            Check the claim type, and if it belongs to the set of normalizable types, we then normalize
+            the input name by converting spaces to dashes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext">
+            <summary>
+            Provides implementation of <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser"/>.  Contains username and associated claims to use with authorization
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.#ctor(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext"/> class.
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.IsWAPDUser">
+            <summary>
+            Is the user a WAPD user?
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.IsAADUser">
+            <summary>
+            Is it an AAD User/ServicePrincipal?
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedToken(System.String,System.String,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsNamespaceExpansions)">
+            <summary>
+            Requests the worker host to get a dSTS delegated token on behalf of the user
+            </summary>
+            <param name="serviceName">
+              The short name for the dSTS service that a delegated token will be requested for.
+              For example, for the realm svc://acis@acis.engineering.core.windows.net,
+              the "serviceName" is "acis"
+            </param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions">
+              Additional dSTS namespace expansions
+            </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedToken(System.String,System.String,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            Requests the worker host to get a dSTS delegated token on behalf of the user
+            </summary>
+            <param name="serviceName">
+              The short name for the dSTS service that a delegated token will be requested for.
+              For example, for the realm svc://acis@acis.engineering.core.windows.net,
+              the "serviceName" is "acis"
+            </param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions">
+              Additional dSTS namespace expansions
+            </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedToken(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsNamespaceExpansions)">
+            <summary>
+            Requests the worker host to get a dSTS delegated token on behalf of the user
+            </summary>
+            <param name="serviceName">
+              The short name for the dSTS service that a delegated token will be requested for.
+              For example, for the realm svc://acis@acis.engineering.core.windows.net,
+              the "serviceName" is "acis"
+            </param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions">
+              Additional dSTS namespace expansions
+            </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedToken(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            Requests the worker host to get a dSTS delegated token on behalf of the user
+            </summary>
+            <param name="serviceName">
+              The short name for the dSTS service that a delegated token will be requested for.
+              For example, for the realm svc://acis@acis.engineering.core.windows.net,
+              the "serviceName" is "acis"
+            </param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions">
+              Additional dSTS namespace expansions
+            </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedTokenWithServerCertificates(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Collections.Generic.List{System.Security.Cryptography.X509Certificates.X509Certificate2}@)">
+            <summary>
+            Gets the delegated token and the server certificates associated with it.
+            The server certs are used for server authentication. If dsts returns(to the client) server certificates along with security token,
+            then client before handing over token to server, validates the server identity certificate against those certificates.
+             If no certs are returned as part of security token response then library will fall back on PKI validation of server certificate.
+            </summary>
+            <param name="serviceName"></param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions"></param>
+            <param name="serverCertificates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.GetDelegatedTokenForGenevaActions">
+            <summary>
+            Get Delegated Token for the current Geneva Actions environment
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.Name">
+            <summary>
+            User Identity (email address or windows account)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.Alias">
+            <summary>
+            User Alias without @* part from Name
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.Claims">
+            <summary>
+            Enumeration of claims that the user is known to have access to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.DstsToken">
+            <summary>
+            User dsts security token
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisUserContext.IsLocalTestingContext">
+            <summary>
+            Set this to true if using the client manager as the
+            runtime environment for local testing.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters">
+            <summary>
+            A collection of parameter names that ACIS has pre-defined.  These values can be referenced from an IAcisSMEParameterRef
+            without defining an associated IAcisSMEParameter.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.Required">
+            <summary>
+            If the parameter is required
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.Optional">
+            <summary>
+            If the parameter is optional
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.Get(Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterName,System.Boolean)">
+            <summary>
+            Gets the specified well known parameter ref.  The Name should be drawn from the ParameterName enum.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="optional">The optional.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.Get(Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterName)">
+            <summary>
+            Gets the specified well known parameter ref.  The name should be drawn from the ParameterName enum.  The parameter will be treated as required.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.GetParameter(Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterName)">
+            <summary>
+            Gets the well known parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.Get(System.String,System.Boolean)">
+            <summary>
+            Gets the specified well known parameter.  The Name should be drawn from the ParameterName enum.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.IsWellKnownParameter(System.String)">
+            <summary>
+            Determines whether the specified paramref's key is that of a well known parameter (i.e., not finding a corresponding parameter is not bad)
+            </summary>
+            <param name="paramRefKey">The parameter reference key.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.IsWellKnownScopedParameter(System.String)">
+            <summary>
+            Determines whether the specified paramref's key is that of a scoped subscription id parameter
+            </summary>
+            <param name="paramRefKey">The parameter reference key.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisWellKnownParameters.GetAllParameters">
+            <summary>
+            Gets all well known params
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterName">
+            <summary>
+            Well-known parameter names (don't need to be redefined by client libraries)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedTokenHelper.GetDelegatedTokenWithServerCertificates(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.String,System.String,System.Collections.Generic.List{System.Security.Cryptography.X509Certificates.X509Certificate2}@)">
+            <summary>
+            Gets the delegated token and the server certificates associated with it.
+            The server certs are used for server authentication. If dsts returns(to the client) server certificates along with security token,
+            then client before handing over token to server, validates the server identity certificate against those certificates.
+             If no certs are returned as part of security token response then library will fall back on PKI validation of server certificate.
+            </summary>
+            <param name="serviceName"></param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions"></param>
+            <param name="name"></param>
+            <param name="userToken"></param>
+            <param name="serverCertificates"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedTokenHelperMock">
+            <summary>
+            A mock that substitutes delegated token auth flows for
+            user auth flows to support local testing scenarios.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisClaim">
+            <summary>
+            Describes a user claim
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisClaim.Type">
+            <summary>
+            Claim Type; Reference values from AcisClaimTypes for valid/expected types
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisClaim.Name">
+            <summary>
+            Claim Name; The specific instance of a claim type.  Eg: "PlatformServiceViewer"
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisClaim.DelegatedJitClaim">
+            <summary>
+            Delegated JIT Claim information.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisDsmsSecrets.Certificates">
+            <summary>
+            Returns all the managed certs retrieved from dSMS.
+            The key of the dictionary corresponds to the identifier specified in the sme config.
+            </summary>
+            <returns>
+            Certificate info contains a collection of different versions of a certificate where the key is the version number
+            where the value 1 corresponds to the latest secret, value 2 corresponds to the secret before it and so on
+            </returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisDsmsSecrets.AdHocSecrets">
+            <summary>
+            Returns all the AdHoc secrets retieved from dSMS.
+            The key of the dictionary corresponds to the identifier specified in the sme config.
+            </summary>
+            <returns>
+            AdHocSecretInfo contains a collection of different versions of an adhoc secret where the key is the version number
+            where the value 1 corresponds to the latest secret, value 2 corresponds to the secret before it and so on
+            </returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisDsmsSecrets.ServiceIdentities">
+            <summary>
+            Returns all the service identities retieved from dSMS.
+            The key of the dictionary corresponds to the identifier specified in the sme config.
+            </summary>
+            <returns>
+            ServiceIdentityInfo contains a collection of different versions of a service identity where the key is the version number
+            where the value 1 corresponds to the latest secret, value 2 corresponds to the secret before it and so on
+            </returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisDsmsSecrets.StorageAccounts">
+            <summary>
+            Returns all the storage accounts retieved from dSMS.
+            The key of the dictionary corresponds to the identifier specified in the sme config. 
+            </summary>
+            <returns>
+            StorageAccountInfo contains a collection of different versions of a storage account where the key is the version number
+            where the value 1 corresponds to the latest secret, value 2 corresponds to the secret before it and so on
+            </returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys">
+            <summary>
+            Represents the Keys of an ACIS SME.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys.GetKeyPath(System.String)">
+            <summary>
+            Gets a key path with the specified identifier (or null if not exist)
+            </summary>
+            <param name="identifier">identifier of a key found in the Acis exntesion SMEConfig</param>
+            <returns>Path belongs to the key found in the Acis extension SMECofig</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys.SignByKeyAsync(System.String,System.Byte[],System.String)">
+            <summary>
+            Sign with the key specified identofier
+            </summary>
+            <param name="identifier">identifier of a key found in the Acis exntesion SMEConfig</param>
+            <param name="digest">digest to be signed</param>
+            <param name="algorithm">algorithm to be used to sign. Default is RS256.</param>
+            <returns>Signed digest</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys.GetCertificateForKeyAsync(System.String)">
+            <summary>
+            Get public certificate associated with the specified key if exists (Certificate)
+            </summary>
+            <param name="identifier">identifier of a key found in the Acis exntesion SMEConfig</param>
+            <returns>Public Certificate</returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys.Identifiers">
+            <summary>
+            Gets list of Identifiers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisKeys.Endpoint">
+            <summary>
+            Gets endpoint name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisRuntimeManagerProxy.RuntimePing(System.String)">
+            <summary>
+            The runtime (AcisExtHost process) calls this function to let the runtime manager know that it is alive.
+            </summary>
+            <param name="runtimeId">The Id assigned to the runtime.</param>
+            <returns>true if the runtime was recognized by the runtime manager. false if this runtimeId is not being tracked by the runtime manager. The
+            runtime is expected to terminate itself if it gets a false return value.</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisRuntimeManagerProxy.GetDelegatedToken(System.String,System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.String,System.String)">
+            <summary>
+            Gets a dsts delegated security token on behalf of the user
+            </summary>
+            <param name="runtimeId"></param>
+            <param name="serviceName"></param>
+            <param name="endpoint"></param>
+            <param name="dstsMetadata"></param>
+            <param name="namespaceExpansions"></param>
+            <param name="userName"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisRuntimeManagerProxy.GetDelegatedTokenWithServerCertificates(System.String,System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.String,System.String,System.Collections.Generic.List{System.String}@)">
+            <summary>
+             Gets a dsts delegated security token on behalf of the user and the server certificates associated with the token.
+            </summary>
+            <param name="runtimeId"></param>
+            <param name="serviceName"></param>
+            <param name="endpoint"></param>
+            <param name="dstsMetadata"></param>
+            <param name="namespaceExpansions"></param>
+            <param name="userName"></param>
+            <param name="token"></param>
+            <param name="serverCertificates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisRuntimeManagerProxy.GetDelegatedTokenForGenevaActions(System.String,System.String,System.String)">
+            <summary>
+            Gets a dsts delegated security token on behalf of the user
+            for the current Geneva Actions service
+            </summary>
+            <param name="runtimeId"></param>
+            <param name="userName"></param>
+            <param name="userToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSecrets">
+            <summary>
+            Represents the Secrets of an ACIS SME.  This class does NOT usually need to be instantiated or implemented by 
+            client libraries!  Instead, an instance of this will be provided by the infrastructure to the client library.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSecrets.GetSecretPath(System.String)">
+            <summary>
+            Gets a secret path with the specified identifier (or null if not exist)
+            </summary>
+            <param name="identifier">identifier of a secret found in the Acis exntesion SMEConfig</param>
+            <returns>Path belongs to the secret found in the Acis extension SMECofig</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSecrets.GetSecretAsync(System.String)">
+            <summary>
+            Tries to get a secret value from keyvault with the specified identifier.
+            A return value is the secret retreived from keyvault.
+            This requires a network call evertime and its expected by the caller to cache this.
+            </summary>
+            <param name="identifier">A string containing the secret identifier found in the Acis exntesion SMEConfig to retreive a secret</param>
+            <returns>Secret retrieved from keyvault</returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSecrets.Identifiers">
+            <summary>
+            Gets list of Identifiers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSecrets.Endpoint">
+            <summary>
+            Gets endpoint name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension">
+            <summary>
+            Contains information about the overall service package.  This class should be implemented by the client library.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.ExtensionVersion">
+            <summary>
+            Gets the extension's version name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.ServiceName">
+            <summary>
+            Gets the extension's service name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.ResourceTypes">
+            <summary>
+            Gets the extension's resourceType Names.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.OnLoad">
+            <summary>
+            Called by ACIS at load time.  Should return whether loading succeeded or failed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.OnEndpointCreate(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint)">
+            <summary>
+            Called by ACIS upon loading a specific endpoint from config.  Should return whether initialization succeeded or failed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.Endpoints">
+            <summary>
+            The supported (loaded) endpoints.  Will be filled out by the infrastructure at load time (i.e., a simple get; set; implementation is fine).  
+            Do not do an actual implementation beyond that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.Parameters">
+            <summary>
+            The full list of declared parameters.  Will be filled out by the infrastructure at load time (i.e., a simple get; set; implementation is fine)
+            Do not do an actual implementation beyond that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.Logger">
+            <summary>
+            Gets an instance of the logger.  This will be set prior to any functions being called (although it will not be initialized in the constructor; for any initialization time logic, use OnLoad)
+            when running in ACIS context.  For test purposes, your test code can set it to an instance of AcisSMEConsoleLogger (or other logger implementation if desired).
+            
+            In other words, your client library itself should not set this, only external sources (your test code, our ACIS code).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.Configuration">
+            <summary>
+            Gets the configuration of the extension.  Will be set by ACIS prior to any functions being called (i.e., a simple get; set implementation is fine).
+            Do not do an actual implementation beyond that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.ExtensionEnvironment">
+            <summary>
+            Gets the extension environment.  Will bet set by ACIS prior to any functions being called.  i.e., a simple get; set; implementation is fine.
+            Do not do an actual implementation beyond that.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.Certificates">
+            <summary>
+            Gets the certificates specified by the configuration.  Will be set by ACIS prior to any functions being called.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisServiceManagementExtension.ClientToolsVersion">
+            <summary>
+            Gets or sets the client tools version.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEConfiguration">
+            <summary>
+            Represents the configuration of an ACIS SME Endpoint.  This class does NOT usually need to be instantiated or implemented by 
+            client libraries!  Instead, an instance of this will be provided by the infrastructure to the client library.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEConfiguration.GetConfigurationValue(System.String)">
+            <summary>
+            Gets a configuration value (metadata or otherwise) with the specified key (or null if not exist)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEConfiguration.GetMetadataValue(System.String)">
+            <summary>
+            Gets a metadata value with the specified key (or null if not exist)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEConfiguration.Keys">
+            <summary>
+            Gets the keys.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEConfiguration.MetadataKeys">
+            <summary>
+            Gets the metadata keys.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint">
+            <summary>
+            Contains information about the specific ACIS SME Endpoint.  Instances of this will be passed into IAcisServiceManagementExtension.
+            Client libraries should usually NOT instantiate / implement this themselves.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Name">
+            <summary>
+            The name of the endpoint (displayed in the UI)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Url">
+            <summary>
+            The endpoint URL of the endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.EndpointTypeIdentifier">
+            <summary>
+            The type identifier 
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Configuration">
+            <summary>
+            Gets the configuration for this endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Secrets">
+            <summary>
+            Gets the secrets for this endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Keys">
+            <summary>
+            Gets the keys for this endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.DsmsSecrets">
+            <summary>
+            Gets the dsms secrets for this endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.ApiGatewayDstsCertificate">
+            <summary>
+            Gets the API Gateway secrets for this endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.DstsNamespaceExpansions">
+            <summary>
+            Gets the dSTS namespace expansions for this endpoint.
+            Used by delegated authentication and API Gateway
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.DelegatedAuthConfig">
+            <summary>
+            Gets the dSTS namespace expansions for this endpoint.
+            Used by delegated authentication and API Gateway
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.ContainingExtension">
+            <summary>
+            Gets the extension object that this endpoint belongs to (can also be used to get access to general extension-wide config and to logging).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.ClaimsRequired">
+            <summary>
+            *** DEPRECATED*** - ACIS No longer considers endpoint claims when determining access.  Endpoints will be shown or hidden based on if the
+                                user has access to at least one operation within.
+            Gets the claims required for this endpoint.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Operations">
+            <summary>
+            Gets the list of operations the endpoint supports
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.Certificate">
+            <summary>
+            Gets the certificate associated with this endpoint (or null if not specified).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.EndpointOperationFlags">
+            <summary>
+            Get the operations flags defined for an endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint.UseODataSemantics">
+            <summary>
+            Gets or sets the value indicating if we should use OData semantics for this endpoint
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger">
+            <summary>
+            IAcisSMELogger provides an interface for client libraries to log messages into the ACIS infrastructure.  For local testing purposes, an instance of IAcisSMEConsoleLogger can be used.
+            In ACIS itself, an ACIS-specific implementation will be used which logs to MDS.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.LogVerbose(System.String)">
+            <summary>
+            Logs a verbose-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.LogInfo(System.String)">
+            <summary>
+            Logs an info-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.LogWarning(System.String)">
+            <summary>
+            Logs a warning-level message
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.LogError(System.String)">
+            <summary>
+            Logs an error-level message
+            </summary>        
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.LogError(System.Exception,System.String)">
+            <summary>
+            Logs an error-level message
+            </summary>        
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.IsVerboseEnabled">
+            <summary>
+            Gets a value indicating whether verbose logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.IsInfoEnabled">
+            <summary>
+            Gets a value indicating whether info logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.IsWarningEnabled">
+            <summary>
+            Gets a value indicating whether warning logging is enabled
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMELogger.IsErrorEnabled">
+            <summary>
+            Gets a value indicating whether error logging is enabled
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation">
+            <summary>
+            Each operation to be executed by SME should be specified by extending this.  Client libraries will need many implementations of this (one per operation)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.State">
+            <summary>
+            Used for maintaining the state of an operation i.e. whether the operation is active, is being deprecated or is disabled. Also provides the ability to provide an alternate operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.NotificationMessage">
+            <summary>
+            Any notification that might or might not be required when the operation loads.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.OperationKey">
+            <summary>
+            Short, simplified name for operation.  Used to identify the operation, and is exposed in command-line interfaces.  No non-alphanumeric characters permitted (no spaces, etc.)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.OperationName">
+            <summary>
+            Gets the operation name that is displayed to the user in the UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.HelpText">
+            <summary>
+            Gets the help text for the operation which will be displayed in the Actions portal.
+            This supports markdown (https://en.wikipedia.org/wiki/Markdown for more information).
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.OperationGroup">
+            <summary>
+            Gets the operation group this operation is part of.
+            Can return something like new ExampleOperationGroup();
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.ClaimsRequired">
+            <summary>
+            Gets a list of claims required for the operation; any one of the claims specified is sufficient permission for the operation.
+            Operation will be executed directly without additional approval from a sovereign cloud operator if one of those claims is present.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.PrivilegeLevel">
+            <summary>
+            Gets the privilege level for the operation, which determines whether it can be run
+            by the user, or whether it requires approval or is for national cloud operators only.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.ExecutionMethod">
+             <summary>
+             The MethodInfo of the function to execute.  The function in question must have the same number of parameters as are returned by this.Parameters, with the exception of "known" ACIS build parameters:
+             parameters of type IAcisSMEOperationProgressUpdater, IAcisSMEEndpoint, IAcisServiceManagementExtension, and OperationExecutionContext will all be filled out by the appropriate value without
+             a corresponding Parameter value.
+            
+             The function must return an IAcisSMEOperationResponse.
+             </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.CustomerData">
+            <summary>
+            Specifies the level of access the operation has to customer data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.EndUserMetadata">
+            <summary>
+            Specifies the level of access the operation has to end-user metadata data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.AccessControlData">
+            <summary>
+            Specifies the level of access the operation has to access control data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.PaymentInformation">
+            <summary>
+            Specifies the level of access the operation has to payment information
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.AdministratorData">
+            <summary>
+            Specifies the level of access the operation has to administrator data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.SystemMetadata">
+            <summary>
+            Specifies the level of access the operation has to system metadata
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.Parameters">
+            <summary>
+            Gets the list of parameters that apply to this operation
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.Metadata">
+            <summary>
+            Gets metadata for the operation which can be used for access determinations by the access control engine.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.ContainingExtension">
+            <summary>
+            Gets or sets the containing service management extension.  This will be populated by the infrastructure.
+            (i.e., a simple get; set; implementation is fine).  Client library code should not set this.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.IsIdempotent">
+            <summary>
+            Implemented by SME operations to specify if the operation is idempotent. Idempotent operations should be
+            safe for multiple retries. Acis portal will retry idempotent operations in case of real (i.e., non-user-caused) failure.
+            By default ACIS treats readwrite operations as non-idempotent, and readonly as idempotent.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.OperationRenderType">
+            <summary>
+            Gets the type of the output to be rendered (based off (int)OutputRenderType.{type})
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.TemplateName">
+            <summary>
+            Gets the name of the output template.  Only used if the output render type is Template.
+            Default AcisSMEOperation implementation is null, which MUST be overridden if the output type is Template.  This will be a validation error if not overridden by a Template render type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.DisallowedContexts">
+            <summary>
+            Gets a value indicating what contexts this operation can be executed in
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.DataModelRowPropertyInfo">
+            <summary>
+            Gets the propertyinfo for the property on the return type that will represent the collection of rows to be rendered.
+            In the case of non-UI operations, this is unused.
+            In the case of UI operations, this must match a property on the typeparam of the IAcisSMEOperationResponse that gets returned.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.IsHighRiskOperation">
+            <summary>
+            Gets a boolean value indicating whether this operation is considered extremely high risk to a service/platform. If set, AcisPortal will display warning message.
+            </summary>
+            <value>
+            <c>true</c> if this instance is high risk operation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation.IsApprovalRequired">
+            <summary>
+            Determines if the operation will be forced to go through approval service or not
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationGroup">
+            <summary>
+            Represents an operation group in the UI.  This class should be extended (once per operation group), and will in turn be used by SMEOperation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationGroup.Name">
+            <summary>
+            The name (displayed in the UI)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationGroup.DisallowedEndpoints">
+            <summary>
+            Allows the disabling of operations on specific endpoint types.  May be used to have operations that are specific to a type of endpoint.
+            The string value should equal the identifier of the endpoint in the config file.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationProgressUpdater">
+            <summary>
+            The progress updater is used for reporting continually on the state of operations.  It may be used (or not) by operations to write information which will get rendered to the ACIS UI prior
+            to the operation actually completing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationProgressUpdater.WriteLine(System.String,System.Object[])">
+            <summary>
+            Writes the line, together with string.Format formatting applied.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse">
+            <summary>
+            Represents an operation response from executing an SME operation, generally you can instantiate an  AcisSMEOperationResponse 
+            directly and initialize, or use AcisSMEOperationResponseExtensions utility methods to directly create a pre-initialized response
+            with the values you provide the constructor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.SuccessResult">
+            <summary>
+            Gets the success result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.Result">
+            <summary>
+            Gets the operation result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.ErrorMessage">
+            <summary>
+            Gets or sets the error message.  Only used if this is filled out and result is null
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.ContinuationToken">
+            <summary>
+            Continuation Token used to fetch more results, or to poll for results if none available yet.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.ProgressMessage">
+            <summary>
+            Progress messages from the underlying operation, intended to be displayed to the user.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.LogMessage">
+            <summary>
+            Gets the message to be logged.  If no specific log message is required, leave null.  
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.GetUserConfirmation">
+            <summary>
+            Used to perform some validations and getting confirmation from user.
+            If user confirms, the operation is re-executed by setting the IsConfirmed property in the OperationExecutionContext
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse.ExecutionStartTime">
+            <summary>
+            Used to track the time Method got executed from reflection
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1">
+            <summary>
+            Represents an operation response from executing an SME operation, generally should use AcisSMEOperationResponseExtensions utility methods to directly 
+            create a pre-initialized response with the values you provide the constructor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.SuccessResult">
+            <summary>
+            Gets the success result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.Result">
+            <summary>
+            Gets the operation result
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.ErrorMessage">
+            <summary>
+            Gets or sets the error message.  Only used if this is filled out and result is null
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.ContinuationToken">
+            <summary>
+            Continuation Token used to fetch more results, or to poll for results if none available yet.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.ProgressMessage">
+            <summary>
+            Progress messages from the underlying operation, intended to be displayed to the user.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse`1.LogMessage">
+            <summary>
+            Gets the message to be logged.  If no specific log message is required, leave null.  
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationResponseExtensions.IsDone(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperationResponse)">
+            <summary>
+            Determines whether the specified response is done.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter">
+            <summary>
+            Client libraries should implement one instance of this per supported parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.Key">
+            <summary>
+            Gets the short-name or ID form used to identify this parameter.  This name is surfaced in command-line interfaces.
+            This value must be all lower-case alphanumeric, with no spaces or punctuation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.Name">
+            <summary>
+            Full parameter name, displayed in the ACIS UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.HelpText">
+            <summary>
+            Gets the help text (HTML supported; displayed in the UI when the user clicks the help button.  Leave null for no help button for this parameter)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.HasSecretInformation">
+            <summary>
+            Gets a value indicating whether this parameter (may) contain secret information.
+            If true, the value of this parameter will not be logged in auditing in plain text, but rather in an encrypted form.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.ValidationArgs">
+            <summary>
+            The validation arguments.  Used to provide things like int range.  
+            May be overridden by ValidationArgs in IAcisSMEParameterRef
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.IsParameterValid(System.String,System.String,System.Object@,System.String@)">
+            <summary>
+            Only called if "Custom" validation type is provided.  The validationArgs may be equivalent to the ValidationArgs of this class, but ParameterRefs can override it, so 
+            the validationArgs that are passed in should be used instead of the instance member.
+            Use correctedValue if there's a specific return type that you want to use. Leave null (i.e., don't modify the value) if there's no specific value.
+            Use errorMessage if there's an error message you want to output.  This value will only be used if IsParameterValid returns false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.ContainingExtension">
+            <summary>
+            Gets or sets the containing extension.  This should be implemented as a simple get; set; property by the parameter, as it will be set prior to calling any functions.  
+            Do not use it during the constructor, as it will be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter.Category">
+            <summary>
+            Category of parameter.
+            Regular parameters are default and dont need to be overridden but can have special category e.g. ResourceScope
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameterRef">
+            <summary>
+            Client libraries should implement one instance of this per supported parameter.  I.e., the IAcisSMEParameter is declared initially,
+            (say, SubscriptionID), and then an instance of AcisSMEParameterRef is declared for a specific instance of it.  
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameterRef.Key">
+            <summary>
+            Gets the short-name or ID form used to identify this parameter.  This Key needs to reference either an instance of
+            IAcisSMEParameter, or a constant from AcisWellKnownParameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameterRef.ValidationArgs">
+            <summary>
+            Arguments for the associated validation logic. 
+            See ValidationArgsHelper for help constructing this
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameterRef.IsOptional">
+            <summary>
+            Whether the specific reference instance is optional or not (if optional it'll be passed in as the default value if not provided)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser">
+            <summary>
+            Provides details about the user and what claims they have.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.Name">
+            <summary>
+            User Identity
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.Alias">
+            <summary>
+            Alias of user
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.Claims">
+            <summary>
+            Enumeration of claims that the user is known to have access to.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedToken(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            Get Delegated Token
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedToken(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsNamespaceExpansions)">
+            <summary>
+            Get Delegated Token
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedToken(System.String,System.String,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            Get Delegated Token
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedToken(System.String,System.String,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsNamespaceExpansions)">
+            <summary>
+            Get Delegated Token
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedTokenForGenevaActions">
+            <summary>
+            Get Delegated Token for the current Geneva Actions environment
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.GetDelegatedTokenWithServerCertificates(System.String,System.Uri,Microsoft.WindowsAzure.Security.Authentication.ServerAuthenticationMetadata,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Collections.Generic.List{System.Security.Cryptography.X509Certificates.X509Certificate2}@)">
+            <summary>
+            Gets the delegated token and the server certificates associated with it.
+            The server certs are used for server authentication. If dsts returns(to the client) server certificates along with security token,
+            then client before handing over token to server, validates the server identity certificate against those certificates.
+             If no certs are returned as part of security token response then library will fall back on PKI validation of server certificate.
+            </summary>
+            <param name="serviceName"></param>
+            <param name="endpointUri"></param>
+            <param name="metadata"></param>
+            <param name="namespaceExpansions"></param>
+            <param name="serverCertificates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser.IsAADUser">
+            <summary>
+            Is it an AAD User/ServicePrincipal?
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsCertificateSecret.Identifier">
+            <summary>
+            Gets or sets KeyVault secret Identifier.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsCertificateSecret.Path">
+            <summary>
+            Gets or sets the secret keyvault path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsCertificateSecret.ServiceName">
+            <summary>
+            Gets or sets the secret keyvault path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsCertificateSecret.UseDNSNameFromServiceMetadata">
+            <summary>
+            Use the DNS Name returned in the service metadata instead of the endpoint uri.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsDelegatedAuthConfig.ServiceName">
+            <summary>
+            Gets or sets the dSTS ServiceName
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IDstsDelegatedAuthConfig.ServiceAccount">
+            <summary>
+            Gets or sets the dSTS Service Account
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate">
+            <summary>
+            Represents a single extension certificate (.pfx), to be used at runtime.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.Identifier">
+            <summary>
+            Gets the cert identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.Path">
+            <summary>
+            Gets the cert path
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.SubjectName">
+            <summary>
+            Gets the subject name
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.Thumbprint">
+            <summary>
+            Gets the thumbprint as read from the cert
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.StoreLocation">
+            <summary>
+            Gets the store location where this cert is installed (or null if it's not installed)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.StoreName">
+            <summary>
+            Gets the name of the store where this cert is installed (or null if it's not installed)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificate.Contents">
+            <summary>
+            Gets the actual X509Certificate2.  This is the decrypted value.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificateCollection">
+            <summary>
+            Represents the collection of extension certificates owned by the extension
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificateCollection.GetByName(System.String)">
+            <summary>
+            Gets the certificate by subject name (note: must be unique)
+            Returns null if not found.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificateCollection.GetByIdentifier(System.String)">
+            <summary>
+            Gets the certificate by the identifier.
+            Returns null if not found.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificateCollection.GetByThumbprint(System.String)">
+            <summary>
+            Gets the certificate by thumbprint.  
+            Returns null if not found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IExtensionCertificateCollection.AllCertificates">
+            <summary>
+            Gets all certificates specified by this extension.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ITimeboundOperation">
+            <summary>
+            Used to represent a timebound operation.  Note that the operation execution must make use of it in order to allow it to work.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes">
+            <summary>
+            Pending conversion of schemas.xmlsoap.org to http://sts.msft.net
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Group">
+            <summary>
+            Most commonly used for ACIS Claims.  User is the member of an authorization group.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Email">
+            <summary>
+            User's email address
+            NOTE: ClaimTypes.Email defines a string ending in "/email" not "/emailaddress"
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.FismaCompliantUser">
+            <summary>
+            Claim value is "true" if user is a FISMA-compliant user.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.ManagerAlias">
+            <summary>
+            User's Manager's Alias
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.ManagerEmail">
+            <summary>
+            User's Manager's Email
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.ManagerName">
+            <summary>
+            User's Manager's Name
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.FismaSuperUser">
+            <summary>
+            Claim value is "true" if the user is a FISMA-compliant SuperUser
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.WindowsAccount">
+            <summary>
+            User's windows account (Domain\username)
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.IdentityProvider">
+            <summary>
+            The identity provider claim type
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Role">
+            <summary>
+            Claim indicating that user is the member of a role.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Upn">
+            <summary>
+            User's UserPrincipalName
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Name">
+            <summary>
+            User's general name
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.DefaultClaimType">
+            <summary>
+            Default claim type to use if one is not specified otherwise.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.Spn">
+            <summary>
+            ServicePrincipalName
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.AADPayloadV1">
+            <summary>
+            Payload in the Access Token alluding to client's Application ID/Service principal (v1)
+            Ref: https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens#payload-claims
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimTypes.AADPayloadV2">
+            <summary>
+            Payload in the Access Token alluding to client's Application ID/Service principal (v2)
+            Ref: https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens#payload-claims
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisClaimIssuers.LocalAcis">
+            <summary>
+            Arbitrary Issuer used to indicate the claim was issued by ACIS itself.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisFileResult">
+            <summary>
+            A simple data class to store file contents when returning to ACIS
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHTMLResult">
+            <summary>
+            A simple data class to store html contents when returning to ACIS
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHTMLResult.HtmlOutput">
+            <summary>
+            Operation HTML output content that will be used to be previewed in geneva portal
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHTMLResult.Result">
+            <summary>
+            Operation result that could be in json, xml or any format
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHtmlResultExtensions">
+            <summary>
+            Extensions for ease-of-use of AcisHTMLResult.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHtmlResultExtensions.ResultString(Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisHTMLResult)">
+            <summary>
+            Gets the result as a string
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DataAccessLevel">
+            <summary>
+            Used to specify the access level an operation has for a certain type of data
+            "Unclassified" is used to indicate legacy operations. This value should not be used in Acis SME packages. Any such usage violates validations.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim">
+            <summary>
+            Class to expose JIT claim details for an endpoint accessed via dSTS delegated auth
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            JIT claim details for an endpoint accessed via dSTS delegated auth
+            </summary>
+            <param name="resourceType">The JIT resource</param>
+            <param name="claim">The claim value</param>
+            <param name="homeDsts">The Home dSTS endpoint (optional)</param>
+            <param name="dstsAccountName">The service's dsts account name (optional)</param>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.ResourceType">
+            <summary>
+            The JIT resource type the claim applies to.
+            example: RDFE
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.Claim">
+            <summary>
+            The claim value.
+            example: PlatformServiceAdministrator
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.HomeDsts">
+            <summary>
+            Optional. The home dSTS endpoint for the service.
+            example: ch1-dsts.dsts.core.windows.net
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.ServiceDstsAccountName">
+            <summary>
+            The dSTS Account Name service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.Equals(System.Object)">
+            <summary>
+            Equals
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.GetHashCode">
+            <summary>
+             GetHashCode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DelegatedJitClaim.ToString">
+            <summary>
+             ToString
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DisallowedOperationContext.None">
+            <summary>
+            Operation is allowed to be executed in any context
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.DisallowedOperationContext.StandaloneExecution">
+            <summary>
+            The operation cannot be executed in a standalone context (i.e., going to the tools menu and directly invoking it).
+            Rather, it has to be executed as a subroutine followup to another operation - for example, by clicking on a cell
+            within another UI template.  These operations do NOT show up in the dropdown in the tools menu.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult">
+            <summary>
+            The EmailInclusiveResult class is used to return a result that sends an e-mail, as well as a result that can be rendered in the UI.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.#ctor(System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the EmailInclusiveResult class.
+            </summary>
+            <param name="operationResponse">The operation response (will be displayed in the UI/returned to API callers)</param>
+            <param name="emailSubject">The (non-html-enabled) e-mail subject</param>
+            <param name="emailBody">The (html-enabled) body of the e-mail</param>
+            <param name="emailTo">The e-mail address(es) to send to.  Delimit with ;</param>
+            <param name="emailCc">The e-mail address(es) to CC.  Delimit with ; (or omit if none)</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.#ctor(System.Object,System.String,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Initializes a new instance of the EmailInclusiveResult class
+            </summary>
+            <param name="operationResponse">The operation response (will be displayed in the UI/returned to API callers)</param>
+            <param name="emailSubject">The (non-html-enabled) email subject</param>
+            <param name="emailBody">The (html-enabled) body of the e-mail</param>
+            <param name="emailTo">The e-mail address(es) to send to</param>
+            <param name="emailCc">The e-mail address(es) to CC (omit or null if none)</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.#ctor(System.Object,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the EmailInclusiveResult class.  Handles common logic for operationResponse/emailBody initialization.
+            </summary>
+            <param name="operationResponse">The operation response (will be displayed in the UI/returned to API callers)</param>
+            <param name="emailSubject">The (non-html-enabled) e-mail subject</param>
+            <param name="emailBody">The (html-enabled) body of the e-mail</param>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.OperationResponse">
+            <summary>
+            Gets the operation response (text displayed in the UI/returned to API callers)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.EmailSubject">
+            <summary>
+            Gets the e-mail's subject (not html-enabled)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.EmailBody">
+            <summary>
+            Gets the e-mail body (html-enabled)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.EmailTo">
+            <summary>
+            Gets the address(es) the e-mail will be sent to
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.EmailCc">
+            <summary>
+            Gets the address(es) that will be CCed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.EmailInclusiveResult.SplitEmails(System.String)">
+            <summary>
+            Splits the e-mail(s) on the semicolon character.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment">
+            <summary>
+            Used for accessing environment-specific information in ACIS
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.CurrentDirectory">
+            <summary>
+            Gets the current directory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.ContactEmailAddress">
+            <summary>
+            Gets the team's alias that is responsible for this service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IcmService">
+            <summary>
+            Gets the Icm service to escalate to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IcmTeam">
+            <summary>
+            Gets the Icm team name to escalate to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IcmServiceId">
+            <summary>
+            Gets the ID of the ICM service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IcmTeamId">
+            <summary>
+            Gets the ID of the ICM team.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.ServiceTreeServiceId">
+            <summary>
+            Gets the ID of the service in Service Tree.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IsInvalidServiceTreeInformation">
+            <summary>
+            Specifies if the Service Tree id given in the config file is valid on service tree. 
+            As long as we have a service matching with given guid we consider it as valid service tree id.
+            This field is set to true if the information doesn't match
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.TemporaryPath">
+            <summary>
+            Gets the temporary path.  Sample use case is when an operation performs action(s) that need a local folder store stream of data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.IsInvalidIcmInformation" -->
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ExtensionEnvironment.MetricAccount">
+            <summary>
+            Specifies the metric account to propagate extension metrics to when executed
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationInfo.ExtensionName">
+            <summary>
+            The extension name is the name used for onboarding the extension.
+            The name is the same as the one that appears in the publish SME dropdown.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationInfo.OperationKey">
+            <summary>
+            The operation key is different from operation name.
+            The operation key is function name sepcified in the 
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OutputRenderType">
+            <summary>
+            Represents potential render types.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OutputRenderType.PlainText">
+            <summary>
+            The good old standard ACIS output: plain text
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OutputRenderType.Template">
+            <summary>
+            Makes use of an output template for UI tables
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OutputRenderType.Binary">
+            <summary>
+            Operation produces a file download result, as it's a binary output format
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OutputRenderType.HTML">
+            <summary>
+            Operation produces a HTML as an output.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterCategory">
+            <summary>
+            Property to be setup in Parameter base class
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterCategory.Default">
+            <summary>
+            Default category of parameter. User does not have to specify it.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterCategory.ResourceScope">
+            <summary>
+            ResourceScope parameter - this parameter value will be used for getting scoped access to subscription/resource
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterCategory.InstanceIds">
+            <summary>
+            A parameter of this type will be passed instance ids from LOS (as part of OaaS orchestration)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterRenderType">
+            <summary>
+            Represents the method of rendering this to the user
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterRenderType.Form">
+            <summary>
+            This is applicable for the schema.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParameterValidationType">
+            <summary>
+            Represents the potential return types for a parameter
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParamRefFromParam.Get(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEParameter,System.Boolean,System.String)">
+            <summary>
+            Gets the specified parameter's paramref (generated instead of using ParameterRef)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParamRefFromParam.Get``1(System.Boolean,System.String)">
+            <summary>
+            Gets the specified parameter's paramref (generated instead of using ParameterRef)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ParamRefFromParam.GetOptional``1(System.String)">
+            <summary>
+            Gets the specified parameter's paramref (generated instead of using ParameterRef)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SuccessResult">
+            <summary>
+            This enum is used to indicate the type of Operation execution Result - Success or one of the more detailed Failures. 
+            Important to note here is not all the failures will be retried by Acis platform, only platform-related and operation's internal failures 
+            will be retried provided the operation is marked as idempotent.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext">
+            <summary>
+            The Operation Execution Context class is a class that's understood by ExecutionMethods - if provided as a param, it will be filled out at execution time.
+            It provides additional information about the current execution, such as the current user, and the raw operation parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.#ctor(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext"/> class.
+            NOTE: It looks like some extension depend on this signiture even though this is only constructed by us.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.#ctor(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEUser,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.CurrentUser">
+            <summary>
+            Gets the current user.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.ActivityId">
+            <summary>
+            Gets the activity identifier for the current operation's execution.  Also used in ACIS logging, so it is correlatable.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.IsConfirmed">
+            <summary>
+            Is set when the operation is re executed after getting the user's confirmation
+            (used in conjunction with GetUserConfirmation property in the operation response)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.RawOperationParameters">
+            <summary>
+            Provides the raw operation parameters, indexed by the parameter's key
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.GenevaActionsEnvironmentNameInJarvis">
+            <summary>
+            This is acis enviroment operation is currently running in.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.JarvisUri">
+            <summary>
+            The preferred uri to use for Jarvis
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.CurrentEnvironmentUri">
+            <summary>
+            This represents the URI of the current Geneva Actions service.
+            It can be used from within an extension to make requests to
+            the service it is running in.
+            e.g. https://acis.engineering.core.windows.net
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.OperationPartitionKey">
+            <summary>
+            The operation key is the partition key for an operation execution entity
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.ApprovalServiceRequestId">
+            <summary>
+            The approval service request id
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.AcisEnvironment">
+            <summary>
+            This represents the current Geneva Actions region
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.GenerateGenevaActionsLink(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            It generates Geneva Action relative URL that could be used in HTML output to hyperlink another operations
+            </summary>
+            <param name="extensionName">Extension Name</param>
+            <param name="operationId">Operation ID</param>
+            <param name="endpointName">Endpoint user selected</param>
+            <param name="parameters">Dictionary of parameters</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.EncodeUrlParameterValue(System.String)" -->
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext.GenevaAcisEnvironements">
+            <summary>
+            Acis Enviroment names used in Geneva Actions
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel">
+            <summary>
+            Denotes a level of privilege for an operation. This is used to determine
+            authorization requirements for running an operation.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel.DeferToUserClaim">
+            <summary>
+            Infer privilege level from the user claim (e.g. Scope-PlatformServiceAdministrator)
+            Non-delegated auth operations will default to this value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel.Standard">
+            <summary>
+            Authorized users are allowed to execute Standard operations directly
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel.ElevatedNonPrivileged">
+            <summary>
+            Authorized users are allowed to execute ElevatedNonPrivileged operations directly
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel.Privileged">
+            <summary>
+            Privileged operations require additional approval to be authorized.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationPrivilegeLevel.CustomerData">
+            <summary>
+            CustomerData operations can only be run by Operators of national cloud environments.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEBooleanParameter">
+            <summary>
+            Represents a standard boolean parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEBooleanParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEBooleanParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMECascadeDynamicDefaultTextParameter.DynamicParameterValue(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint,Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Gets the parameter values.  Override this in order to write your custom logic.  Note that this must complete within 25 seconds, although it's highly recommended to make sure this is very performant,
+            with caching, simplification, or whatever other methodology can be employed.  If in doubt, contact the wapdacis team.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMECascadeDynamicParam">
+            <summary>
+            Represents a cascading dynamic (values derived at run-time) parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMECascadeDynamicParam.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMECascadeDynamicParam.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMECascadeDynamicParam.ValidationArgs">
+            <summary>
+            The validation arguments. Note that, if the user chooses to override this, it must be a public non-static method on the IAcisSMEParameter class it's associated with.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEEnumParameter`1">
+            <summary>
+            Represents an enum parameter.  T must be an enum.  Due to C# limitations it's not possible to impose a compile-time restriction on T to be : Enum
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEEnumParameter`1.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEEnumParameter`1.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEEnumParameter`1.ValidationArgs">
+            <summary>
+            The validation arguments.  Used to provide things like int range.
+            May be overridden by ValidationArgs in IAcisSMEParameterRef
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEEnumParameter`1.IsParameterValid(System.String,System.String,System.Object@,System.String@)">
+            <summary>
+            Only called if "Custom" validation type is provided.  The validationArgs may be equivalent to the ValidationArgs of this class, but ParameterRefs can override it, so
+            the validationArgs that are passed in should be used instead of the instance member.
+            Use correctedValue if there's a specific return type that you want to use. Leave null (i.e., don't modify the value) if there's no specific value.
+            Use errorMessage if there's an error message you want to output.  This value will only be used if IsParameterValid returns false.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults">
+            <summary>
+            Provides methods for operations that return a file to the UI.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults.SMEFileResponseStagingFolder">
+            <summary>
+            The IaaS Tool staging folder name
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults.BuildZipFile(System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisFileResult},System.String)">
+            <summary>
+            Builds a zip file from Enumerable list of files
+            </summary>
+            <param name="fileEntries">The file entries.</param>
+            <param name="temporaryPath">A temporary staging path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults.BuildResultFileBaseName(System.String)">
+            <summary>
+            Builds a base name for the result file based on the operation name. 
+            </summary>
+            <param name="workflowName">Name of the operation workflow.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults.SerializeDict(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Serializes the dictionary.
+            </summary>
+            <param name="dict">The dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StreamZipper.AddStream(System.IO.Stream,System.String)">
+            <summary>
+            Adds the contents of the given stream as a new file (with the name provided), and closes
+            the stream.
+            
+            Use <see cref="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEFileResults.BuildZipFile(System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisFileResult},System.String)"/> instead of this, to close the
+            zip file after writing it.
+            If using this method, please call Dispose method to close the zip file.
+            </summary>
+            <param name="inputStream">The input stream.</param>
+            <param name="relativeName">The relative path for file in zip folder.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StreamZipper.ZipFolder(System.String)">
+            <summary>
+            Zips the folder.
+            </summary>
+            <param name="folderPath">The folder path.</param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StreamZipper.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StreamZipper.BuildTempFilename">
+            <summary>
+            Builds the temp filename.
+            </summary>
+            <returns>
+            The temp filename
+            </returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEStringListParameter">
+            <summary>
+            Represents an list of strings parameter displayed as a dropdown
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEStringListParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEStringListParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEStringListParameter.ValidationArgs">
+            <summary>
+            The validation arguments.  Used to provide things like int range.
+            May be overridden by ValidationArgs in IAcisSMEParameterRef
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEStringListParameter.GetStringValuesForDropdown">
+            <summary>
+            Implement this function so as to return the strings which need to be displayed as a part of the dropdown
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.GetActiveCertificateFromThumbprint(System.String)">
+            <summary>
+                Retrieves the active certificate for a configuration. First checks the primary certificate, if it is missing it expired,
+                checks the alternate certificate
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.FindCertificate(System.String)">
+            <summary>
+                Checks for a certificate in the current user and local machine store by thumbprint first, then name
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.FindCertificate(System.String,System.Security.Cryptography.X509Certificates.X509FindType)">
+            <summary>
+                Checks if a certificate exists in the current user and local machine store
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.FindCertificate(System.String,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType)">
+            <summary>
+            Checks if a certificate exists in a specific store. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.FindCertificateInternal(System.String,Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.IStore,System.Security.Cryptography.X509Certificates.X509FindType)">
+            <summary>
+                This is unit testable method which uses IStore, to check if a certificate exists in a specific store.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.IsCertificateDateValid(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+                Checks if the date of a certificate is valid
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.DecryptToString(System.String)">
+            <summary>
+                Decrypts an encrypted string to string using certificates on the machine
+            </summary>
+            <param name="encryptedPassword"></param>
+            <returns>Decrypted string</returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.BaseConnectionString">
+            <summary>
+            Base Connection string without the Account or AccountKey, and potentially contains {0} format specifiers for account name.
+            Ref: http://msdn.microsoft.com/en-us/library/ee758697.aspx
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.GetBaseConnectionString(System.String)">
+            <summary>
+            Fetches a storage account base connection string given the storage account name seto be used.
+            Note: Although the storage account name is not needed in the public cloud (as it uses "DefaultEndpoints=http")
+                  this storage account name is needed for Mooncake and Fairfax.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.GetBaseConnectionStringInternal(System.String,System.String)">
+            <summary>
+            Unit testable method to fetch base connection string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.DecryptFile(System.String,System.Boolean)">
+            <summary>
+            Reads an entire file into memory, and attempts to decrypt the content within.
+            </summary>
+            <param name="fileName">path and filename of file to read and decrypt</param>
+            <param name="requireDecrypt">When true, throw decryption failures.  When false, return raw file bytes on decrypt failure.</param>
+            <returns>Raw bytes of the file after decryption</returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.DecryptFileInternal(System.String,System.Boolean,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Unit testable method to decrypt file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.DecryptFileAndParseXml(System.String,System.String)">
+            <summary>
+            Reads an entire file into memory, decrypts it if needed, then parses the contents into XML.
+            </summary>
+            <param name="directory">Directory to find file</param>
+            <param name="fileName">Name of file to read, decrypt, and parse into XML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.DecryptFileAndParseXmlInternal(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Unit testable method to decrypt and parse xml.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.AcisSMEUtility.Decrypt(System.Byte[],System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Decrypt the given cyphertext bytes.  If cert is not provided, the localmachine and currentuser stores
+            are searched for any appropriate key.
+            If cert is provided, the cyphertext must be encrypted with that cert, or a CryptographicException is thrown.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StringAndFormattingUtilities.ResponseFormatter.FormatObject(System.Object)">
+            <summary>
+            Formats the object for output.  Makes use of reflection to read properties, using a unique identifier for objects to ensure circular references don't cause issues.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StringAndFormattingUtilities.ResponseFormatter.AppendProperty(System.String,System.Object,System.Boolean)">
+            <summary>
+            Routine to append the property and property value to the output stream.  In the case of XML output
+            no checks are made on valid propertyName, however the propertyValue is properly escaped.
+            </summary>
+            <param name="propertyName"></param>
+            <param name="propertyValue"></param>
+            <param name="continueLine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StringAndFormattingUtilities.TrimToNull(System.String)">
+            <summary>
+            Trims the given string, returning null if the given string was null, empty, or whitespace only.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StringAndFormattingUtilities.TrimToEmpty(System.String)">
+            <summary>
+            Trims the given string, returning string.Empty if the given string was null, empty, or whitespace only.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.StringAndFormattingUtilities.TrimToDefault(System.String,System.String)">
+            <summary>
+            Trims the given string, returning the provided default value if the given string was null, empty, or whitespace only.
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.IStore">
+            <summary>
+            Interface used for mocking X509Store, to be used in unit tests.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SimplificationClasses.TestStore">
+            <summary>
+            Wrapper class for X509Store.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDateTimeParameter">
+            <summary>
+            Represents a standard DateTime parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDateTimeParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDateTimeParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDefaultTextParameter">
+            <summary>
+            Represents a default text parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicDefaultTextParameter.DynamicParameterValue(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint,Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation)">
+            <summary>
+            Gets the parameter values.  Override this in order to write your custom logic.  Note that this must complete within 25 seconds, although it's highly recommended to make sure this is very performant,
+            with caching, simplification, or whatever other methodology can be employed.  If in doubt, contact the wapdacis team.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam">
+            <summary>
+            Represents a dynamic (values derived at run-time) parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam.ValidationArgs">
+            <summary>
+            The validation arguments. Note that, if the user chooses to override this, it must be a public non-static method on the IAcisSMEParameter class it's associated with.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam.IsCachingAllowed">
+            <summary>
+            Gets a value indicating whether caching is allowed. By default, this is true, meaning for any given combination of user/endpoint, the value will be cached some time.  If this is overridden to false
+            then every single pageload of an operation using this will result in that operation's dynamic params being re-calculated.  Try to avoid setting this to false unless absolutely necessary, as 
+            doing this may slow down pageloads of your operations.
+            
+            NOTE: Currently this MUST be set to true (hence why it's not virtual).  Non-cached parameters are not supported for performance reasons yet.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEDynamicParam.DynamicParameterValues(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint,Microsoft.WindowsAzure.Wapd.Acis.Contracts.OperationExecutionContext,Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEOperation)">
+            <summary>
+            Gets the parameter values.  Override this in order to write your custom logic.  Note that this must complete within 25 seconds, although it's highly recommended to make sure this is very performant,
+            with caching, simplification, or whatever other methodology can be employed.  If in doubt, contact the wapdacis team.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileNo64Parameter">
+            <summary>
+            Represents a standard File parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileNo64Parameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileNo64Parameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileParameter">
+            <summary>
+            Represents a standard File parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEFileParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEGuidParameter">
+            <summary>
+            Represents a standard Guid parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEGuidParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEGuidParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEIntegerParameter">
+            <summary>
+            Represents a standard integer parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEIntegerParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEIntegerParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEPositiveIntegerParameter">
+            <summary>
+            Represents a standard positive integer parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEPositiveIntegerParameter.ValidationArgs">
+            <summary>
+            The validation arguments.  Used to provide things like int range.
+            May be overridden by ValidationArgs in IAcisSMEParameterRef
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESerializedObjectParam`1.HelpText">
+            <summary>
+            Gets the help text (HTML supported; displayed in the UI when the user clicks the help button.  Leave null for no help button for this parameter)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESerializedObjectParam`1.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESerializedObjectParam`1.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESerializedObjectParam`1.IsParameterValid(System.String,System.String,System.Object@,System.String@)">
+            <summary>
+            Only called if "Custom" validation type is provided.  The validationArgs may be equivalent to the ValidationArgs of this class, but ParameterRefs can override it, so
+            the validationArgs that are passed in should be used instead of the instance member.
+            Use correctedValue if there's a specific return type that you want to use. Leave null (i.e., don't modify the value) if there's no specific value.
+            Use errorMessage if there's an error message you want to output.  This value will only be used if IsParameterValid returns false.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation">
+            <summary>
+            A simplifying base-class to extend from in order to define a super user operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.CustomerData">
+            <summary>
+            Specifies the level of access the operation has to customer data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.EndUserMetadata">
+            <summary>
+            Specifies the level of access the operation has to end-user metadata data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.AccessControlData">
+            <summary>
+            Specifies the level of access the operation has to access control data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.PaymentInformation">
+            <summary>
+            Specifies the level of access the operation has to payment information
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.AdministratorData">
+            <summary>
+            Specifies the level of access the operation has to administrator data
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESuperUserOperation.SystemMetadata">
+            <summary>
+            Specifies the level of access the operation has to system metadata
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESystemMetadataReadOnlyOperation">
+            <summary>
+            A simplifying base-class to extend from in order to define a System Metadata read-only operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESystemMetadataReadOnlyOperation.SystemMetadata">
+            <summary>
+            Specifies the level of access the operation has to system metadata
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESystemMetadataReadWriteOperation">
+            <summary>
+            A simplifying base-class to extend from in order to define a System Metadata read-write operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMESystemMetadataReadWriteOperation.SystemMetadata">
+            <summary>
+            Specifies the level of access the operation has to system metadata
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMETextParameter">
+            <summary>
+            Represents a standard text parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMETextParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMETextParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMETitleOnlyTextParameter">
+            <summary>
+            Represents a standard text parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEUriParameter">
+            <summary>
+            Represents a standard URI parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEUriParameter.RenderType">
+            <summary>
+            The render type (should be value from ParameterRenderType enum)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.AcisSMEUriParameter.ValidationTypes">
+            <summary>
+            The validation types (flags OR-ed of ParameterValidationType enum)
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension">
+            <summary>
+            Base extension class for swagger. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.ServiceName">
+            <summary>
+            Default service name. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.ExtensionVersion">
+            <summary>
+            Default extension version
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.SmeExtensionName">
+            <summary>
+            The extension name specified in the SME Config File.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.SmeExtensionVersion">
+            <summary>
+            The extension version specified in the SME Config file. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.OnLoad">
+            <summary>
+            Default onload behavior.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.SwaggerBaseExtension.OnEndpointCreate(Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint)">
+            <summary>
+            Default endpoint create method.
+            </summary>
+            <param name="endpoint">The instance of <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.IAcisSMEEndpoint"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper">
+            <summary>
+            ValidationArgsHelper is used for building validation arguments.  Usual usage consists of creating an instance, calling the appropriate set(s) and then using ToString() to get the actual resultant
+            string to return from ValidationArgs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper.SetDefaultCheckboxState(System.Boolean)">
+            <summary>
+            Sets the default state of the checkbox - note that this overrides whatever was set via SetDefaultText (both cannot be set regardless though)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper.SetEndpointConfigListArgs(System.String)">
+            <summary>
+            Used to set the param validation arg so it pulls the dropdown list from the endpoint configs.  This requires that all endpoints specify the config key in question!
+            Mutually exclusive with SetExtensionConfigListArgs.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper.SetExtensionConfigListArgs(System.String)">
+            <summary>
+            Used to set the param validation arg so it pulls the dropdown list from the extension's configuration.
+            Mutually exclusive with SetEndpointConfigListArgs.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.Contracts.ValidationArgsHelper.ToString">
+            <summary>
+            Gets the legal args string for use in ValidationArgs.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Wapd.Acis.SME.UI.CSVDisplayHelper">
+            <summary>
+            The CSV display helper is used to generate CSV output for the textbox if desired.  It allows the specification of column headers and takes in a series of rows.
+            Return it.ToString() in order to get the string output at the end.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.SME.UI.CSVDisplayHelper.SetHeaderColumns(System.String[])">
+            <summary>
+            Sets the header columns (null to not display any).
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.SME.UI.CSVDisplayHelper.AddRow(System.Object[])">
+            <summary>
+            Adds the row.  For objects that are not strings, their .ToString() function will be called.
+            Note that mismatch in count between headers/values is allowed - depending upon which way the mismatch is, either the cells at the end of the row will be empty of values,
+            or some columns will be unnamed.  Mid-row nulls are allowed (though they need to be explicitly specified that way, or else values to the right will be shifted to the left accordingly)
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Wapd.Acis.SME.UI.CSVDisplayHelper.GenerateFromDataTable(System.Data.DataTable,System.Boolean)">
+            <summary>
+            Automatically fills out the headers/rows based off the specified datatable.
+            Using this will wipe out any data produced from previous calls to SetHeaderColumns/AddRow
+            After using this, make use of .ToString() to get the result string.
+            </summary>
+        </member>
+    </members>
+</doc>

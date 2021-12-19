@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AcisSMEConfiguration">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="SMEEndpoints" type="SMEEndpoints" minOccurs="1" maxOccurs="1" />
+        <xs:element name="SMEConfig" type="SMEConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ExtensionCertificates" type="ExtensionCertificates" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContactInfo" type="ContactInfo" minOccurs="1" maxOccurs="1" />
+        <xs:element name="ApiGatewayConfig" type="ApiGatewayConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="MetricAccount" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ExtensionName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ExtensionVersion" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ResourceTypes" type="ResourceTypes" minOccurs="0" maxOccurs="1" />
+        <xs:element name="OneAccess" type="OneAccess" minOccurs="0" maxOccurs="1" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="SMEEndpoints">
+    <xs:sequence>
+      <xs:element name="Endpoint" type="Endpoint" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Endpoint">
+    <xs:sequence>
+      <!-- type = "reference" or "value" -->
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="EndpointType" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Url" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="CertificateIdentifier" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SMEConfig" type="SMEConfig" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Secrets" type="Secrets" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ApiGatewayDstsCertificate" type="ApiGatewayDstsCertificate" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="DsmsSecrets" type="DsmsSecrets" minOccurs="0" maxOccurs="1" />
+      <xs:element name="KeyVaultAccount" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="DstsNamespaceExpansions" type="DstsNamespaceExpansions" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="DstsDelegatedAuth" type="DstsDelegatedAuth" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Swagger" type="SMESwagger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="UseODataSemantics" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Keys" type="Keys" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SMEConfig">
+    <xs:sequence>
+      <xs:element name="ConfigElement" type="ConfigElement" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+	
+  <xs:complexType name="Secrets">
+    <xs:sequence>
+      <xs:element name="Secret" type="Secret" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Keys">
+    <xs:sequence>
+      <xs:element name="Key" type="Key" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ConfigElement">
+    <xs:sequence>
+      <xs:element name="Key" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Value" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IsMetadata" type="xs:boolean" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Secret">
+    <xs:sequence>
+      <xs:element name="Identifier" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Key">
+    <xs:sequence>
+      <xs:element name="Identifier" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DsmsSecrets">
+    <xs:sequence>
+      <xs:element name="DsmsSecret" type="ManagedSecret" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ManagedSecret">
+    <xs:sequence>
+      <xs:element name="Identifier" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="ShouldInstall" type="xs:boolean" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApiGatewayDstsCertificate">
+    <xs:sequence>
+      <xs:element name="Identifier" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="ServiceName" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="UseDNSNameFromServiceMetadata" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DstsNamespaceExpansions">
+    <xs:sequence>
+      <xs:element name="DstsNamespaceExpansion" type="DstsNamespaceExpansion" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DstsNamespaceExpansion">
+    <xs:sequence>
+      <xs:element name="OriginalNamespace" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="ExpandedNamespaces" type="ExpandedNamespaces" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExpandedNamespaces">
+    <xs:sequence>
+      <xs:element name="ExpandedNamespace" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DstsDelegatedAuth">
+    <xs:sequence>
+      <xs:element name="ServiceName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ServiceAccount" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExtensionCertificates">
+    <xs:sequence>
+      <xs:element name="ExtensionCertificate" type="ExtensionCertificate" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExtensionCertificate">
+    <xs:sequence>
+      <xs:element name="Type" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Identifier" type="xs:string" maxOccurs="1" />
+      <xs:element name="FilePath" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="EncryptedPassword" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="InstallTo" type="InstallTo" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="Type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Preencrypted" />
+      <xs:enumeration value="SecretStore" />
+      <xs:enumeration value="KeyVault" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ResourceTypes">
+    <xs:sequence>
+      <xs:element name="ResourceType" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="InstallTo">
+    <xs:sequence>
+      <xs:element name="StoreLocation" type="StoreLocation" minOccurs="0" maxOccurs="1" />
+      <xs:element name="StoreName" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ContactInfo">
+    <xs:sequence>
+      <xs:element name="ContactEmailAddress" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IcmService" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IcmTeam" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="ServiceTreeServiceId" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="StoreLocation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LocalMachine" />
+      <xs:enumeration value="CurrentUser" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StoreName">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="My" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ApiGatewayConfig">
+      <xs:sequence>
+        <xs:element name="Swagger" type="SMESwagger" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SMESwagger">
+      <xs:sequence>
+        <xs:element name="FilePath" type="xs:string" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OneAccess">
+    <xs:all>
+      <xs:element name="Policy" type="Policy" minOccurs="1" maxOccurs="1"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="Policy">
+    <xs:sequence>
+      <xs:element name="FilePath" type="xs:string" minOccurs="1" maxOccurs="1" />      
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

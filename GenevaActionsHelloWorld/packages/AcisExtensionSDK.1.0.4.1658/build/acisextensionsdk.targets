@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+   <!--Please refer to instructions at  https://genevamondocs.azurewebsites.net/actions/How%20Do%20I/signAnExtension.html -->
+   <Target Name="PackagingGAExtension" AfterTargets="Build" Condition="'@(GAPackageEnvironment)' != '' And '$(WapdSMEPackageManager)' != ''"
+        Inputs="%(GAPackageEnvironment.InputDir)\**\*"
+        Outputs="%(GAPackageEnvironment.OutputDir)\$(GAPackageName)_%(GAPackageEnvironment.Identity).Package" >
+       <Message Text="Building package for environment %(GAPackageEnvironment.Identity) with configuration file %(GAPackageEnvironment.InputDir)\%(GAPackageEnvironment.SMEConfigFile). This should output %(GAPackageEnvironment.OutputDir)\$(GAPackageName)_%(GAPackageEnvironment.Identity).package" />
+       <Exec Condition="'$(GASMEAssembly)'!=''" Command="$(WapdSMEPackageManager) BuildPackage -InputDir:%(GAPackageEnvironment.InputDir) -OutputDir:%(GAPackageEnvironment.OutputDir) -PackageName:$(GAPackageName)_%(GAPackageEnvironment.Identity) -SMEConfig:%(GAPackageEnvironment.SMEConfigFile) -SMEAssembly:$(GASMEAssembly)" />
+       <Exec Condition="'$(GASMEAssembly)'==''" Command="$(WapdSMEPackageManager) BuildPackage -InputDir:%(GAPackageEnvironment.InputDir) -OutputDir:%(GAPackageEnvironment.OutputDir) -PackageName:$(GAPackageName)_%(GAPackageEnvironment.Identity) -SMEConfig:%(GAPackageEnvironment.SMEConfigFile)" />
+   </Target>
+   <Target Name="NotPackagingGAExtension" AfterTargets="Build" Condition="!('@(GAPackageEnvironment)' != '' And '$(WapdSMEPackageManager)' != '')">
+       <Message
+          Condition="'@(GAPackageEnvironment)' == ''"
+          Text="Skipping Target PackagingGAExtension because no GAPackageEnvironment items were defined prior to the import of acisextensionsdk.targets (did you import acisextensionsdk.props first?)"
+       />
+       <Message
+          Condition="'$(WapdSMEPackageManager)' == ''"
+          Text="Skipping Target PackagingGAExtension because the package manager path (property WapdSMEPackageManager) was not defined prior to the import of acisextensionsdk.targets (did you import acisextensionsdk.props first?)"
+       />
+   </Target>
+ </Project>
