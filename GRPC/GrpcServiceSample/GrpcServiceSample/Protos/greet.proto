@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceSample";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetLocations (GetLocationsRequest) returns (stream TripResponse);
+  rpc navigate(stream TripRequest) returns (stream TripResponse);
+  rpc movies(stream bookTicket) returns (returnTickets);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+  string phone = 2;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+  string call = 2;
+}
+
+message GetLocationsRequest {
+  int32 totalDistance = 1;
+}
+
+message TripRequest {
+  int32 distanceTravelled = 1;
+  double elapsedDuration = 2;
+}
+
+message TripResponse {
+  int32 remainingDistance = 1;
+  int32 timeToDestination = 2;
+  double currentSpeedms = 3;
+  double currentSpeedkh = 4;
+}
+
+message bookTicket {
+	int32 seatno = 1;
+	string name = 2;
+}
+
+message returnTickets{
+	int32 totalTickets = 1;
+}
